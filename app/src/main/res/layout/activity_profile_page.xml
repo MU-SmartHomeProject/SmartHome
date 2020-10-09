@@ -17,13 +17,14 @@
 
         <ImageView
             android:id="@+id/user_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:contentDescription="@string/user_icon"
+            app:srcCompat="@android:mipmap/sym_def_app_icon"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
@@ -33,6 +34,7 @@
             android:layout_margin="10dp"
             android:gravity="center"
             android:text="@string/username_txt"
+            android:textColor="@android:color/secondary_text_light"
             android:textSize="24sp" />
 
         <View
@@ -50,6 +52,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"
             android:text="@string/user_email_txt"
+            android:textColor="@android:color/secondary_text_light"
             android:textSize="18sp" />
 
         <View
@@ -63,7 +66,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="@string/change_username_btn" />
+            android:text="@string/change_username_btn"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/change_email_btn"
@@ -72,7 +76,28 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/change_email_btn" />
+            android:text="@string/change_email_btn"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/change_password_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/change_password_btn"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/change_icon_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/change_icon_btn"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/delete_account_btn"
@@ -81,7 +106,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/delete_account_btn" />
+            android:text="@string/delete_account_btn"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/log_out_btn"
@@ -90,6 +116,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/log_out_btn" />
+            android:text="@string/log_out_btn"
+            android:textAllCaps="false" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
