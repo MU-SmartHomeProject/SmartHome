@@ -2,5 +2,11 @@
     <string name="app_name">SmartHome</string>
     <string name="profile_page_btn">Profile Page</string>
     <string name="welcome_to_smart_home_txt">Welcome to Smart home group project.</string>
-    <string name="profile_welcome_txt">Welcome to the Profile Page</string>
+    <string name="username_txt">Username</string>
+    <string name="user_email_txt">Email@email.com</string>
+    <string name="change_username_btn">Change Username</string>
+    <string name="change_email_btn">Change Email</string>
+    <string name="delete_account_btn">Delete Account</string>
+    <string name="log_out_btn">Log Out</string>
+    <string name="user_icon">User Icon</string>
 </resources>
