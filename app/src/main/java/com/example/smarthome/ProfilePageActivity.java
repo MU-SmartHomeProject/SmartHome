@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ProfilePageActivity extends AppCompatActivity {
 
@@ -48,5 +49,18 @@ public class ProfilePageActivity extends AppCompatActivity {
         Cursor cursor = db.getUser(loggedIn);
         cursor.moveToFirst();
         username.setText(cursor.getString(1));
+    }
+
+    public void deleteUser(View v) {
+        int deleted = db.deleteData(loggedIn);
+        if(deleted > 0) {
+            Toast.makeText(this, "Account Deleted", Toast.LENGTH_SHORT).show();
+
+            //Return to main page temporary - Logged out activity when created
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+        else
+            Toast.makeText(this,"Account Not Deleted", Toast.LENGTH_SHORT).show();
     }
 }
