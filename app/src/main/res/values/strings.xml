@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SmartHome</string>
     <string name="profile_page_btn">Profile Page</string>
+    <string name="main_log_in_btn">Log In</string>
     <string name="welcome_to_smart_home_txt">Welcome to Smart home group project.</string>
     <string name="username_txt">Username</string>
     <string name="user_email_txt">Email@email.com</string>

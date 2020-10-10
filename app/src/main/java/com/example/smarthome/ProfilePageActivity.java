@@ -63,4 +63,11 @@ public class ProfilePageActivity extends AppCompatActivity {
         else
             Toast.makeText(this,"Account Not Deleted", Toast.LENGTH_SHORT).show();
     }
+
+    public void logOut(View v) {
+        Toast.makeText(this, "Logged Out Successfully", Toast.LENGTH_SHORT).show();
+        
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }
