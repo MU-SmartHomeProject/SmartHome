@@ -42,12 +42,11 @@ public class ProfilePageActivity extends AppCompatActivity {
         db = new UserDBHelper(getApplicationContext());
         loggedIn = getIntent().getStringExtra("loggedInUser");
 
-        //Set email text
-        email.setText(loggedIn);
-
-        //Set username text
         Cursor cursor = db.getUser(loggedIn);
         cursor.moveToFirst();
+        //Set email text
+        email.setText(cursor.getString(0));
+        //Set username text
         username.setText(cursor.getString(1));
     }
 

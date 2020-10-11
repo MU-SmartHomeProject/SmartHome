@@ -12,4 +12,10 @@
     <string name="log_out_btn">Log Out</string>
     <string name="user_icon">User Icon</string>
     <string name="change_icon_btn">Change Icon</string>
+    <string name="update_username_txt">Update Username</string>
+    <string name="update_email_txt">Update Email</string>
+    <string name="email_txt">Email</string>
+    <string name="update_password_txt">Update Password</string>
+    <string name="password_label">Password</string>
+    <string name="password_txt">Password</string>
 </resources>
