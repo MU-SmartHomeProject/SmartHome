@@ -13,7 +13,7 @@ public class UpdateDetailsActivity extends AppCompatActivity {
 
     private UpdateDetailsAdapter adapter;
     private ViewPager viewPager;
-    private int currentFrag;
+    private int currentFrag, loggedIn;
     private Button submit;
     private ChangeEmailFragment frag1 = new ChangeEmailFragment();
     private ChangeUsernameFragment frag2 = new ChangeUsernameFragment();
@@ -28,6 +28,7 @@ public class UpdateDetailsActivity extends AppCompatActivity {
         viewPager = (ViewPager)findViewById(R.id.update_container);
         submit = (Button)findViewById(R.id.submit) ;
         currentFrag = getIntent().getIntExtra("pos", 0);
+        loggedIn = getIntent().getIntExtra("loggedIn",0);
 
         setup(viewPager);
         viewPager.setCurrentItem(currentFrag);
@@ -42,8 +43,8 @@ public class UpdateDetailsActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
-    public String getLoggedIn() {
-        return getIntent().getStringExtra("loggedIn");
+    public int getLoggedIn() {
+        return loggedIn;
     }
 
     public void update(View v) {

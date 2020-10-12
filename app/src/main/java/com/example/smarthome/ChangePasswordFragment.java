@@ -27,8 +27,7 @@ public class ChangePasswordFragment extends Fragment {
         passwordField = (EditText) view.findViewById(R.id.password_txt);
 
         db = new UserDBHelper(getContext());
-        //loggedIn = ((UpdateDetailsActivity)getActivity()).getLoggedIn();
-        loggedIn = 1;
+        loggedIn = ((UpdateDetailsActivity)getActivity()).getLoggedIn();
         cursor = db.getUser(loggedIn);
         cursor.moveToFirst();
         //Set email text

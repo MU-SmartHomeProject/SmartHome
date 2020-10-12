@@ -53,8 +53,4 @@ public class MainActivity extends AppCompatActivity {
 
         loggedIn = 1; //User 1
     }
-
-    public Context getContext() {
-        return this;
-    }
 }

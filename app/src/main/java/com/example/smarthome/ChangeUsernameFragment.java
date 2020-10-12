@@ -3,12 +3,14 @@ package com.example.smarthome;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.hardware.camera2.TotalCaptureResult;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,8 +31,7 @@ public class ChangeUsernameFragment extends Fragment {
         usernameField = (EditText) view.findViewById(R.id.username_txt_update);
 
         db = new UserDBHelper(getContext());
-        //loggedIn = ((UpdateDetailsActivity)getActivity()).getLoggedIn();
-        loggedIn = 1;
+        loggedIn = ((UpdateDetailsActivity)getActivity()).getLoggedIn();
         cursor = db.getUser(loggedIn);
         cursor.moveToFirst();
         //Set username text

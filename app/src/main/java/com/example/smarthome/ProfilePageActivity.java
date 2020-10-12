@@ -65,21 +65,21 @@ public class ProfilePageActivity extends AppCompatActivity {
     public void changeEmail(View v) {
         Intent intent = new Intent(this, UpdateDetailsActivity.class);
         intent.putExtra("loggedIn", loggedIn);
-        intent.putExtra("pos", 0);
+        intent.putExtra("pos", 0); //pass the fragment number
         startActivity(intent);
     }
 
     public void changeUsername(View v) {
         Intent intent = new Intent(this, UpdateDetailsActivity.class);
         intent.putExtra("loggedIn", loggedIn);
-        intent.putExtra("pos", 1);
+        intent.putExtra("pos", 1); //pass the fragment number
         startActivity(intent);
     }
 
     public void changePassword(View v) {
         Intent intent = new Intent(this, UpdateDetailsActivity.class);
         intent.putExtra("loggedIn", loggedIn);
-        intent.putExtra("pos", 2);
+        intent.putExtra("pos", 2); //pass the fragment number
         startActivity(intent);
     }
 

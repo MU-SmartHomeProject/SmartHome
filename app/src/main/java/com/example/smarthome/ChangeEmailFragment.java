@@ -27,8 +27,7 @@ public class ChangeEmailFragment extends Fragment {
         emailField = (EditText) view.findViewById(R.id.user_email_txt);
 
         db = new UserDBHelper(getContext());
-        //loggedIn = ((UpdateDetailsActivity)getActivity()).getLoggedIn();
-        loggedIn = 1;
+        loggedIn = ((UpdateDetailsActivity)getActivity()).getLoggedIn();
         cursor = db.getUser(loggedIn);
         cursor.moveToFirst();
         //Set email text
