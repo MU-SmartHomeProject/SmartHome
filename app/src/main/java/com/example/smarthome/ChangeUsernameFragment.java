@@ -18,7 +18,7 @@ public class ChangeUsernameFragment extends Fragment {
 
     private EditText usernameField;
     private UserDBHelper db;
-    private String loggedIn;
+    private int loggedIn;
     Cursor cursor;
 
     @Nullable
@@ -29,18 +29,19 @@ public class ChangeUsernameFragment extends Fragment {
         usernameField = (EditText) view.findViewById(R.id.username_txt_update);
 
         db = new UserDBHelper(getContext());
-        loggedIn = ((UpdateDetailsActivity)getActivity()).getLoggedIn();
+        //loggedIn = ((UpdateDetailsActivity)getActivity()).getLoggedIn();
+        loggedIn = 1;
         cursor = db.getUser(loggedIn);
         cursor.moveToFirst();
-        //Set email text
-        usernameField.setText(cursor.getString(1));
+        //Set username text
+        usernameField.setText(cursor.getString(2));
 
         return view;
     }
 
     public boolean updateUsername(){
         cursor.moveToFirst();
-        boolean updated = db.updateData(usernameField.getText().toString(),cursor.getString(0),cursor.getString(2));
+        boolean updated = db.updateData(Integer.parseInt(cursor.getString(0)), usernameField.getText().toString(),cursor.getString(1),cursor.getString(3));
         return updated;
     }
 }

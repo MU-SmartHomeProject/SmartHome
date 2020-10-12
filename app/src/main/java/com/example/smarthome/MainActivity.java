@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         Password: abc123
      */
 
-    private String loggedIn;
+    private int loggedIn;
     private Button profileBtn;
     private UserDBHelper db;
 
@@ -34,12 +34,12 @@ public class MainActivity extends AppCompatActivity {
 
         profileBtn = (Button)findViewById(R.id.profile_page_btn);
         db = new UserDBHelper(this);
-        loggedIn = "";
+        loggedIn = -1;
     }
 
     //profileBtn has android:onclick for this function
     public void runProfilePage(View v) {
-        if(loggedIn.isEmpty())
+        if(loggedIn == -1)
             Toast.makeText(this, "Not logged in!", Toast.LENGTH_SHORT).show();
         else {
             Intent intent = new Intent(this, ProfilePageActivity.class);
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     public void logIn(View v) {
         Toast.makeText(this, "Successful Log In", Toast.LENGTH_SHORT).show();
 
-        loggedIn = "testaccount@email.com"; //User 1
+        loggedIn = 1; //User 1
     }
 
     public Context getContext() {

@@ -13,8 +13,11 @@ public class UpdateDetailsActivity extends AppCompatActivity {
 
     private UpdateDetailsAdapter adapter;
     private ViewPager viewPager;
+    private int currentFrag;
     private Button submit;
-    private ChangeUsernameFragment frag1 = new ChangeUsernameFragment();
+    private ChangeEmailFragment frag1 = new ChangeEmailFragment();
+    private ChangeUsernameFragment frag2 = new ChangeUsernameFragment();
+    private ChangePasswordFragment frag3 = new ChangePasswordFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,16 +27,17 @@ public class UpdateDetailsActivity extends AppCompatActivity {
         adapter = new UpdateDetailsAdapter(getSupportFragmentManager());
         viewPager = (ViewPager)findViewById(R.id.update_container);
         submit = (Button)findViewById(R.id.submit) ;
+        currentFrag = getIntent().getIntExtra("pos", 0);
 
         setup(viewPager);
-        viewPager.setCurrentItem(getIntent().getIntExtra("pos", 0));
+        viewPager.setCurrentItem(currentFrag);
     }
 
     private void setup(ViewPager viewPager) {
         UpdateDetailsAdapter adapter = new UpdateDetailsAdapter(getSupportFragmentManager());
-        adapter.addFragment(frag1, "changeUsernameFragment");
-        adapter.addFragment(new ChangeEmailFragment(), "changeEmailFragment");
-        adapter.addFragment(new ChangePasswordFragment(), "changePasswordFragment");
+        adapter.addFragment(frag1, "changeEmailFragment");
+        adapter.addFragment(frag2, "changeUsernameFragment");
+        adapter.addFragment(frag3, "changePasswordFragment");
 
         viewPager.setAdapter(adapter);
     }
@@ -43,11 +47,35 @@ public class UpdateDetailsActivity extends AppCompatActivity {
     }
 
     public void update(View v) {
-        boolean updated = frag1.updateUsername();
 
-        if(updated)
+        if(currentFrag == 0) {
+            boolean updated = frag1.updateEmail();
+
+            if(updated)
             Toast.makeText(this, "Successfully Updated", Toast.LENGTH_SHORT).show();
-        else
+            else
             Toast.makeText(this, "Updated Unsuccessful", Toast.LENGTH_SHORT).show();
+        }
+
+        if(currentFrag == 1) {
+            boolean updated = frag2.updateUsername();
+
+            if(updated) {
+                Toast.makeText(this, "Successfully Updated", Toast.LENGTH_SHORT).show();
+            }
+            else
+                Toast.makeText(this, "Updated Unsuccessful", Toast.LENGTH_SHORT).show();
+        }
+
+        if(currentFrag == 2) {
+            boolean updated = frag3.updatePassword();
+
+            if(updated) {
+                Toast.makeText(this, "Successfully Updated", Toast.LENGTH_SHORT).show();
+            }
+            else
+                Toast.makeText(this, "Updated Unsuccessful", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

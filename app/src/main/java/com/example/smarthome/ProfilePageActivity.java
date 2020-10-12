@@ -17,12 +17,11 @@ public class ProfilePageActivity extends AppCompatActivity {
     private Button changeUsername;
     private Button changeEmail;
     private Button changePassword;
-    private Button changeIcon;
     private Button deleteAccount;
     private Button logOut;
 
     private UserDBHelper db;
-    private String loggedIn;
+    private int loggedIn;
     Cursor cursor;
 
     @Override
@@ -35,20 +34,19 @@ public class ProfilePageActivity extends AppCompatActivity {
         changeUsername = (Button)findViewById(R.id.change_username_btn);
         changeEmail = (Button)findViewById(R.id.change_email_btn);
         changePassword = (Button)findViewById(R.id.change_password_btn);
-        changeIcon = (Button)findViewById(R.id.change_icon_btn);
         deleteAccount = (Button)findViewById(R.id.delete_account_btn);
         logOut = (Button)findViewById(R.id.log_out_btn);
 
         //Get db and loggedIn from MainActivity
         db = new UserDBHelper(getApplicationContext());
-        loggedIn = getIntent().getStringExtra("loggedInUser");
+        loggedIn = getIntent().getIntExtra("loggedInUser", 0);
 
         cursor = db.getUser(loggedIn);
         cursor.moveToFirst();
         //Set email text
-        email.setText(cursor.getString(0));
+        email.setText(cursor.getString(1));
         //Set username text
-        username.setText(cursor.getString(1));
+        username.setText(cursor.getString(2));
     }
 
     @Override
@@ -59,15 +57,29 @@ public class ProfilePageActivity extends AppCompatActivity {
         cursor = db.getUser(loggedIn);
         cursor.moveToFirst();
         //Set email text
-        email.setText(cursor.getString(0));
+        email.setText(cursor.getString(1));
         //Set username text
-        username.setText(cursor.getString(1));
+        username.setText(cursor.getString(2));
+    }
+
+    public void changeEmail(View v) {
+        Intent intent = new Intent(this, UpdateDetailsActivity.class);
+        intent.putExtra("loggedIn", loggedIn);
+        intent.putExtra("pos", 0);
+        startActivity(intent);
     }
 
     public void changeUsername(View v) {
         Intent intent = new Intent(this, UpdateDetailsActivity.class);
         intent.putExtra("loggedIn", loggedIn);
-        intent.putExtra("pos", 0);
+        intent.putExtra("pos", 1);
+        startActivity(intent);
+    }
+
+    public void changePassword(View v) {
+        Intent intent = new Intent(this, UpdateDetailsActivity.class);
+        intent.putExtra("loggedIn", loggedIn);
+        intent.putExtra("pos", 2);
         startActivity(intent);
     }
 
