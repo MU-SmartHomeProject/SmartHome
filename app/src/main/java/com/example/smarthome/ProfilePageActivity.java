@@ -23,6 +23,7 @@ public class ProfilePageActivity extends AppCompatActivity {
 
     private UserDBHelper db;
     private String loggedIn;
+    Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +43,32 @@ public class ProfilePageActivity extends AppCompatActivity {
         db = new UserDBHelper(getApplicationContext());
         loggedIn = getIntent().getStringExtra("loggedInUser");
 
-        Cursor cursor = db.getUser(loggedIn);
+        cursor = db.getUser(loggedIn);
         cursor.moveToFirst();
         //Set email text
         email.setText(cursor.getString(0));
         //Set username text
         username.setText(cursor.getString(1));
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        //Refresh your stuff here
+        cursor = db.getUser(loggedIn);
+        cursor.moveToFirst();
+        //Set email text
+        email.setText(cursor.getString(0));
+        //Set username text
+        username.setText(cursor.getString(1));
+    }
+
+    public void changeUsername(View v) {
+        Intent intent = new Intent(this, UpdateDetailsActivity.class);
+        intent.putExtra("loggedIn", loggedIn);
+        intent.putExtra("pos", 0);
+        startActivity(intent);
     }
 
     public void deleteUser(View v) {

@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,11 +17,11 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/update_password_txt"
+            android:id="@+id/update_username_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="@string/update_email_txt"
+            android:text="@string/update_username_txt"
             android:textColor="@android:color/secondary_text_light"
             android:textSize="24sp" />
 
@@ -36,18 +37,18 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/password_label"
+                android:id="@+id/username_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="@string/email_txt"
+                android:text="@string/username_txt"
                 android:textColor="@android:color/secondary_text_light"
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/password_txt_update"
+                android:id="@+id/username_txt_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -55,17 +56,10 @@
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/username_txt"
-                android:inputType="textPersonName|textEmailSubject"
-                android:text="@string/user_email_txt"
+                android:inputType="textPersonName"
+                android:text="@string/username_txt"
                 android:textColor="@android:color/secondary_text_light" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/update_password_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/change_email_btn" />
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

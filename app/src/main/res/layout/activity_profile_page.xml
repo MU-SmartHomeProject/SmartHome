@@ -67,6 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="@string/change_username_btn"
+            android:onClick="changeUsername"
             android:textAllCaps="false" />
 
         <Button

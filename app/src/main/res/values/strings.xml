@@ -18,4 +18,5 @@
     <string name="update_password_txt">Update Password</string>
     <string name="password_label">Password</string>
     <string name="password_txt">Password</string>
+    <string name="update_btn">Update</string>
 </resources>
