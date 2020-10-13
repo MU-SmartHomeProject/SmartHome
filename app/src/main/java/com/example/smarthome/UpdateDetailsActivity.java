@@ -53,17 +53,16 @@ public class UpdateDetailsActivity extends AppCompatActivity {
             boolean updated = frag1.updateEmail();
 
             if(updated)
-            Toast.makeText(this, "Successfully Updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Successfully Updated", Toast.LENGTH_SHORT).show();
             else
-            Toast.makeText(this, "Updated Unsuccessful", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Updated Unsuccessful", Toast.LENGTH_SHORT).show();
         }
 
         if(currentFrag == 1) {
             boolean updated = frag2.updateUsername();
 
-            if(updated) {
+            if(updated)
                 Toast.makeText(this, "Successfully Updated", Toast.LENGTH_SHORT).show();
-            }
             else
                 Toast.makeText(this, "Updated Unsuccessful", Toast.LENGTH_SHORT).show();
         }
@@ -71,9 +70,8 @@ public class UpdateDetailsActivity extends AppCompatActivity {
         if(currentFrag == 2) {
             boolean updated = frag3.updatePassword();
 
-            if(updated) {
+            if(updated)
                 Toast.makeText(this, "Successfully Updated", Toast.LENGTH_SHORT).show();
-            }
             else
                 Toast.makeText(this, "Updated Unsuccessful", Toast.LENGTH_SHORT).show();
         }

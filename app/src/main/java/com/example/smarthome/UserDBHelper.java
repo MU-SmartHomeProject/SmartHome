@@ -5,8 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
+
+import java.io.Console;
 
 public class UserDBHelper extends SQLiteOpenHelper {
 
@@ -24,7 +27,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase database) {
-        database.execSQL("CREATE TABLE " + USERS_TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT, EMAIL TEXT, USERNAME TEXT, PASSWORD TEXT)");
+        database.execSQL("CREATE TABLE " + USERS_TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT, EMAIL TEXT UNIQUE, USERNAME TEXT UNIQUE, PASSWORD TEXT)");
     }
 
     @Override
@@ -61,6 +64,20 @@ public class UserDBHelper extends SQLiteOpenHelper {
         database.update(USERS_TABLE_NAME, contentValues, "ID = ?", new String[]{Integer.toString(id)});
 
         return true;
+    }
+
+    public Cursor checkUsername(String username) {
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        Cursor cursor = database.rawQuery("SELECT * FROM " + USERS_TABLE_NAME + " WHERE " + USERS_COLUMN_USERNAME + " = '" + username + "'", null);
+        return cursor;
+    }
+
+    public Cursor checkEmail(String email) {
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        Cursor cursor = database.rawQuery("SELECT * FROM " + USERS_TABLE_NAME + " WHERE " + USERS_COLUMN_EMAIL + " = '" + email + "'", null);
+        return cursor;
     }
 
     public int deleteData(int id) {

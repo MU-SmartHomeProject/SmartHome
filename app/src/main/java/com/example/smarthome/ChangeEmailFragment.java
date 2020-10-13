@@ -2,6 +2,7 @@ package com.example.smarthome;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,8 +39,20 @@ public class ChangeEmailFragment extends Fragment {
 
     public boolean updateEmail(){
         cursor.moveToFirst();
-        boolean updated = db.updateData(Integer.parseInt(cursor.getString(0)),cursor.getString(2), emailField.getText().toString(), cursor.getString(3));
-        return updated;
-    }
 
+        Cursor check = db.checkEmail(emailField.getText().toString());
+        int icheck = check.getCount();
+
+        //If entered username not same as current username
+        //And number of emails same as entered email are greater than 0
+        if(!emailField.getText().toString().equals(cursor.getString(1)) && icheck > 0) {
+            Log.d("Error", Integer.toString(icheck));
+            return false;
+        }
+        else {
+            Log.d("Updated ", "No errors");
+            db.updateData(Integer.parseInt(cursor.getString(0)),cursor.getString(2), emailField.getText().toString(), cursor.getString(3));
+            return true;
+        }
+    }
 }

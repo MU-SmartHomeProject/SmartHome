@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.hardware.camera2.TotalCaptureResult;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,20 @@ public class ChangeUsernameFragment extends Fragment {
 
     public boolean updateUsername(){
         cursor.moveToFirst();
-        boolean updated = db.updateData(Integer.parseInt(cursor.getString(0)), usernameField.getText().toString(),cursor.getString(1),cursor.getString(3));
-        return updated;
+
+        Cursor check = db.checkUsername(usernameField.getText().toString());
+        int icheck = check.getCount();
+
+        //If entered username not same as current username
+        //And number of usernames same as entered username are greater than 0
+        if(!usernameField.getText().toString().equals(cursor.getString(2)) && icheck > 0) {
+            Log.d("Error", Integer.toString(icheck));
+            return false;
+        }
+        else {
+            Log.d("Updated ", "No errors");
+            db.updateData(Integer.parseInt(cursor.getString(0)), usernameField.getText().toString(), cursor.getString(1), cursor.getString(3));
+            return true;
+        }
     }
 }
