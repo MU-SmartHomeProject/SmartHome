@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">SmartHome</string>
+    <string name="profile_page_btn">Profile Page</string>
+    <string name="main_log_in_btn">Log In</string>
+    <string name="welcome_to_smart_home_txt">Welcome to Smart home group project.</string>
+    <string name="username_txt">Username</string>
+    <string name="user_email_txt">Email@email.com</string>
+    <string name="change_username_btn">Change Username</string>
+    <string name="change_email_btn">Change Email</string>
+    <string name="change_password_btn">Change Password</string>
+    <string name="delete_account_btn">Delete Account</string>
+    <string name="log_out_btn">Log Out</string>
+    <string name="user_icon">User Icon</string>
+    <string name="change_icon_btn">Change Icon</string>
+    <string name="update_username_txt">Update Username</string>
+    <string name="update_email_txt">Update Email</string>
+    <string name="email_txt">Email</string>
+    <string name="update_password_txt">Update Password</string>
+    <string name="password_label">Password</string>
+    <string name="password_txt">Password</string>
+    <string name="update_btn">Update</string>
 </resources>
