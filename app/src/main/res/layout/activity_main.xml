@@ -1,25 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.widget.SlidingDrawer
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical">
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".MainActivity">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        >
-
-    </RelativeLayout>
 
 
     <RelativeLayout
@@ -74,14 +59,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_page_btn" />
+
     </RelativeLayout>
-    <com.google.android.material.navigation.NavigationView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/anv_view"
-        android:layout_gravity="start">
 
-    </com.google.android.material.navigation.NavigationView>
 </LinearLayout>
-
-</android.widget.SlidingDrawer>
