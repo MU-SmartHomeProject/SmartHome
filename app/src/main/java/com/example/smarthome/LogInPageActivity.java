@@ -9,7 +9,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class LogInPageActivity extends AppCompatActivity {
 
@@ -18,6 +21,7 @@ public class LogInPageActivity extends AppCompatActivity {
     private UserDBHelper db;
     private EditText username;
     private EditText password;
+    private TextView forgot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,7 @@ public class LogInPageActivity extends AppCompatActivity {
         login = (Button)findViewById(R.id.LogInBtn);
         username = (EditText)findViewById(R.id.UsernameLogIn);
         password = (EditText)findViewById(R.id.PasswordLogIn);
+        forgot = (TextView)findViewById(R.id.ForgotPasswordLbl);
         loggedIn = -1;
         db = new UserDBHelper(this);
     }
@@ -59,5 +64,10 @@ public class LogInPageActivity extends AppCompatActivity {
         else { //username not found
             Toast.makeText(this, "Incorrect Username", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void forgot(View v) {
+        Intent intent = new Intent(this, ForgotPageActivity.class);
+        startActivity(intent);
     }
 }
