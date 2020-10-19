@@ -40,8 +40,7 @@
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/username_txt"
-                android:inputType="textPersonName"
-                android:text="@string/username_txt" />
+                android:inputType="textPersonName" />
         </LinearLayout>
 
         <LinearLayout
@@ -78,6 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
+            android:onClick="logIn"
             android:text="@string/main_log_in_btn" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

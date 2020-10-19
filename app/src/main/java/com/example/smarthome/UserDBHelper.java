@@ -73,6 +73,13 @@ public class UserDBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public Cursor checkPassword(String password) {
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        Cursor cursor = database.rawQuery("SELECT * FROM " + USERS_TABLE_NAME + " WHERE " + USERS_COLUMN_PASSWORD + " = '" + password + "'", null);
+        return cursor;
+    }
+
     public Cursor checkEmail(String email) {
         SQLiteDatabase database = this.getWritableDatabase();
 
