@@ -84,6 +84,11 @@ public class LogInPageActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void makeAccount(View v) {
+        Intent intent = new Intent(this, CreateAccountActivity.class);
+        startActivity(intent);
+    }
+
     public void loggedOut() {
         editor.clear().commit();
     }

@@ -94,8 +94,10 @@ public class ProfilePageActivity extends AppCompatActivity {
         if(deleted > 0) {
             Toast.makeText(this, "Account Deleted", Toast.LENGTH_SHORT).show();
 
-            //Return to main page temporary - Logged out activity when created
-            Intent intent = new Intent(this, MainActivity.class);
+            LogInPageActivity lg = new LogInPageActivity();
+            lg.loggedOut();
+
+            Intent intent = new Intent(this, LogInPageActivity.class);
             startActivity(intent);
         }
         else
