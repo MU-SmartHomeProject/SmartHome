@@ -2,7 +2,9 @@ package com.example.smarthome;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,11 +19,14 @@ import org.w3c.dom.Text;
 public class LogInPageActivity extends AppCompatActivity {
 
     private Button login;
-    private int loggedIn;
+    static int loggedIn;
     private UserDBHelper db;
     private EditText username;
     private EditText password;
     private TextView forgot;
+
+    static SharedPreferences sp;
+    static SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +37,20 @@ public class LogInPageActivity extends AppCompatActivity {
         username = (EditText)findViewById(R.id.UsernameLogIn);
         password = (EditText)findViewById(R.id.PasswordLogIn);
         forgot = (TextView)findViewById(R.id.ForgotPasswordLbl);
-        loggedIn = -1;
+
         db = new UserDBHelper(this);
+
+        sp = getSharedPreferences("preferences", MODE_PRIVATE);
+        editor = sp.edit();
+
+        if(sp.getInt("User", 0) != 0)
+            runProfilePage();
     }
 
     public void runProfilePage() {
-            Intent intent = new Intent(this, ProfilePageActivity.class);
-            intent.putExtra("loggedInUser", loggedIn);
-            startActivity(intent);
+        Intent intent = new Intent(this, ProfilePageActivity.class);
+        intent.putExtra("loggedInUser", sp.getInt("User", 0));
+        startActivity(intent);
     }
 
     public void logIn(View v) {
@@ -55,6 +66,8 @@ public class LogInPageActivity extends AppCompatActivity {
             if(cursor1.getString(3).equals(password.getText().toString())) {
                 Toast.makeText(this, "Successful Log In", Toast.LENGTH_SHORT).show();
                 loggedIn = Integer.parseInt(cursor.getString(0));
+
+                editor.putInt("User", loggedIn).commit();
                 runProfilePage();
             }
             else { //password doesn't match
@@ -69,5 +82,9 @@ public class LogInPageActivity extends AppCompatActivity {
     public void forgot(View v) {
         Intent intent = new Intent(this, ForgotPageActivity.class);
         startActivity(intent);
+    }
+
+    public void loggedOut() {
+        editor.clear().commit();
     }
 }

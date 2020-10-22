@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         loggedIn = -1;
     }
 
-    //profileBtn has android:onclick for this function
     public void runProfilePage(View v) {
         if(loggedIn == -1)
             Toast.makeText(this, "Not logged in!", Toast.LENGTH_SHORT).show();

@@ -2,13 +2,18 @@ package com.example.smarthome;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import javax.security.auth.login.LoginException;
 
 public class ProfilePageActivity extends AppCompatActivity {
 
@@ -39,6 +44,7 @@ public class ProfilePageActivity extends AppCompatActivity {
 
         //Get db and loggedIn from MainActivity
         db = new UserDBHelper(getApplicationContext());
+
         loggedIn = getIntent().getIntExtra("loggedInUser", 0);
 
         cursor = db.getUser(loggedIn);
@@ -98,8 +104,11 @@ public class ProfilePageActivity extends AppCompatActivity {
 
     public void logOut(View v) {
         Toast.makeText(this, "Logged Out Successfully", Toast.LENGTH_SHORT).show();
-        
-        Intent intent = new Intent(this, MainActivity.class);
+
+        LogInPageActivity lg = new LogInPageActivity();
+        lg.loggedOut();
+
+        Intent intent = new Intent(this, LogInPageActivity.class);
         startActivity(intent);
     }
 }
