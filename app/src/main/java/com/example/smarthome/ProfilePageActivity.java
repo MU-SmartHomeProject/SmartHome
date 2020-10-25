@@ -1,8 +1,10 @@
 package com.example.smarthome;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -90,18 +92,39 @@ public class ProfilePageActivity extends AppCompatActivity {
     }
 
     public void deleteUser(View v) {
-        int deleted = db.deleteData(loggedIn);
-        if(deleted > 0) {
-            Toast.makeText(this, "Account Deleted", Toast.LENGTH_SHORT).show();
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setCancelable(false);
+        alert.setTitle("Delete Account");
+        alert.setMessage("Are you sure you want to delete?");
 
-            LogInPageActivity lg = new LogInPageActivity();
-            lg.loggedOut();
+        alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                int deleted = db.deleteData(loggedIn);
 
-            Intent intent = new Intent(this, LogInPageActivity.class);
-            startActivity(intent);
-        }
-        else
-            Toast.makeText(this,"Account Not Deleted", Toast.LENGTH_SHORT).show();
+                if(deleted > 0) {
+                    Toast.makeText(getApplicationContext(), "Account Deleted", Toast.LENGTH_SHORT).show();
+
+                    LogInPageActivity lg = new LogInPageActivity();
+                    lg.loggedOut();
+
+                    Intent intent = new Intent(getApplicationContext(), LogInPageActivity.class);
+                    startActivity(intent);
+                }
+                else
+                    Toast.makeText(getApplicationContext(),"Account Not Deleted", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        alert.setNegativeButton("no", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        AlertDialog dialog = alert.create();
+        dialog.show();
     }
 
     public void logOut(View v) {
