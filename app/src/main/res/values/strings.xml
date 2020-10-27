@@ -25,8 +25,11 @@
     <string name="create_account_btn">Create Account</string>
     <string name="navigation_drawer_open">navigation_drawer_open</string>
     <string name="navigation_drawer_close">navigation_drawer_close</string>
+    <string name="nav_log_out">Are you sure, you want to logout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
-<!--    Initilize help lists -->
+    <!--    Initilize help lists -->
     <string-array name="HelpList">
             <item>Click on signup page from home page or profile page.</item>
             <item>Then, login to your profile.</item>
