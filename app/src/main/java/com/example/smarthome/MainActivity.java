@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new ProfileFragment()).commit();
+                    new ProfileFragment(loggedIn)).commit();
             navigationView.setCheckedItem(R.id.nav_profile);
         }
     }
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()) {
             case R.id.nav_profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileFragment()).commit();
+                        new ProfileFragment(loggedIn)).commit();
                 break;
 
             case R.id.nav_device:
