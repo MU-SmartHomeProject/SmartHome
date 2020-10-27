@@ -23,20 +23,14 @@
             android:id="@+id/nav_help"
             android:icon="@drawable/ic_help"
             android:title="Help" />
+
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_share"
+            android:title="Share" />
+
+        <item
+            android:id="@+id/nav_test"
+            android:title="Test" />
     </group>
-
-    <item android:title="Other Items">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_share"
-                android:title="Share" />
-
-            <item
-                android:id="@+id/nav_test"
-                android:title="Test" />
-
-        </menu>
-    </item>
-
 </menu>
