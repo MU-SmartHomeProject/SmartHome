@@ -25,4 +25,14 @@
     <string name="create_account_btn">Create Account</string>
     <string name="navigation_drawer_open">navigation_drawer_open</string>
     <string name="navigation_drawer_close">navigation_drawer_close</string>
+
+<!--    Initilize help lists -->
+    <string-array name="HelpList">
+            <item>Click on signup page from home page or profile page.</item>
+            <item>Then, login to your profile.</item>
+            <item>Then, go to devices from navbar on left.</item>
+            <item>Then you can costomize your devices.</item>
+    </string-array>
+
+
 </resources>
