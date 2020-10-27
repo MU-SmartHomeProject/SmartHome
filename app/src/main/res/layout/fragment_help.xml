@@ -4,22 +4,10 @@
     android:layout_height="match_parent"
     android:background="@android:color/holo_blue_dark">
 
-    <TextView
-        android:id="@+id/welcome_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="557dp"
-        android:text="Welcome to help Fragment"
-        android:textSize="30sp" />
-
     <RelativeLayout
+        android:id="@+id/relativeLayout1"
         android:layout_width="match_parent"
-        android:layout_height="370dp"
+        android:layout_height="418dp"
         android:layout_marginTop="60dp">
 
         <TextView
@@ -29,8 +17,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="17dp"
             android:layout_marginRight="17dp"
-            android:text="Info: Smart Home Application is a simple student project of unit ICT376.
-                            It is developed by 3 students in a group."
+            android:text="Info: Smart Home Application is a simple student project of unit ICT376. It is developed by 3 students in a group."
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
@@ -45,13 +32,13 @@
                         To get maximum benifits from this app you must follow folling steps: "
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-<!--        <ListView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_below="@+id/textView2"-->
-<!--            >-->
-<!--&lt;!&ndash;            list content goes here &ndash;&gt;-->
-<!--        </ListView>-->
+        <!--        <ListView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@+id/textView2"-->
+        <!--            >-->
+        <!--&lt;!&ndash;            list content goes here &ndash;&gt;-->
+        <!--        </ListView>-->
 
         <Button
             android:id="@+id/button1"
@@ -61,5 +48,14 @@
             android:text="Click to login" />
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="33dp"
+        android:text="Welcome to help Fragment"
+        android:textSize="30sp" />
 
 </RelativeLayout>
