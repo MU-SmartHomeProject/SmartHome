@@ -11,16 +11,11 @@
         android:theme="@style/AppTheme">
         <activity android:name=".CreateAccountActivity"></activity>
         <activity android:name=".ForgotPageActivity" />
-        <activity android:name=".LogInPageActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".LogInPageActivity"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name=".UpdateDetailsActivity" />
         <activity android:name=".ProfilePageActivity" />
-        <activity android:name=".MainActivity" />
+<!--        <activity android:name=".MainActivity" />-->
     </application>
 
 </manifest>
