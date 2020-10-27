@@ -37,7 +37,7 @@ public class ProfileFragment extends Fragment {
         chngUsername.setOnClickListener(handle1);
 
         chngeEmail = (Button) v.findViewById(R.id.chngEm);
-        //chngeEmail.setOnClickListener(this);
+        chngeEmail.setOnClickListener(handle2);
 
         chngePassword = (Button) v.findViewById(R.id.chngPass);
         //chngePassword.setOnClickListener(this);
@@ -67,6 +67,15 @@ public class ProfileFragment extends Fragment {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, new UsernameUpdateFragment(loggedIn)).commit();
+        }
+    };
+
+    View.OnClickListener handle2 = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, new EmailUpdateFragment(loggedIn)).commit();
         }
     };
 
