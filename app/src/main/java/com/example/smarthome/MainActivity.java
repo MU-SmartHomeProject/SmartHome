@@ -19,18 +19,6 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    /*
-        Test User 1
-        Email: testaccount@email.com
-        Username: testUser
-        Password: abc123
-
-        Test User 2
-        Email: testaccount2@email.com
-        Username: testUser2
-        Password: abc123
-     */
-
     private int loggedIn;
     private Button profileBtn;
     private UserDBHelper db;
