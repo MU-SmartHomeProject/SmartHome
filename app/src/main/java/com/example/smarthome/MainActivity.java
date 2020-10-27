@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         profileBtn = (Button)findViewById(R.id.profile_page_btn);
         db = new UserDBHelper(this);
-        loggedIn = -1;
+        loggedIn = getIntent().getIntExtra("loggedInUser", 0);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -93,6 +93,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                                Toast.makeText(getApplicationContext(), "Deleted Successfully", Toast.LENGTH_SHORT).show();
 //                                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
 //                                startActivity(intent);
+
+                                Toast.makeText(getApplicationContext(), "Logged Out Successfully", Toast.LENGTH_SHORT).show();
+
+                                LogInPageActivity lg = new LogInPageActivity();
+                                lg.loggedOut();
+
+                                Intent intent = new Intent(getApplicationContext(), LogInPageActivity.class);
+                                startActivity(intent);
                             }
                         })
                         .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
