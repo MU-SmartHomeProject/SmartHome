@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,11 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-public class ProfileFragment extends Fragment implements View.OnClickListener {
+public class ProfileFragment extends Fragment {
 
     private TextView username;
     private TextView email;
-    private TextView click;
+    private Button chngUsername, chngeEmail, chngePassword, delAccount;
     private UserDBHelper db;
     private int loggedIn;
     Cursor cursor;
@@ -31,8 +32,19 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
-        click = (TextView) v.findViewById(R.id.pf);
-        click.setOnClickListener(this);
+
+        chngUsername = (Button) v.findViewById(R.id.chngUsr);
+        chngUsername.setOnClickListener(handle1);
+
+        chngeEmail = (Button) v.findViewById(R.id.chngEm);
+        //chngeEmail.setOnClickListener(this);
+
+        chngePassword = (Button) v.findViewById(R.id.chngPass);
+        //chngePassword.setOnClickListener(this);
+
+        delAccount = (Button) v.findViewById(R.id.delAcc);
+        //delAccount.setOnClickListener(this);
+
         username = (TextView) v.findViewById(R.id.username_txt);
         email = (TextView) v.findViewById(R.id.user_email_txt);
 
@@ -49,10 +61,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         return v;
     }
 
-    @Override
-    public void onClick(View view) {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, new DeviceFragment()).commit();
-    }
+    View.OnClickListener handle1 = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, new UsernameUpdateFragment(loggedIn)).commit();
+        }
+    };
+
 }
