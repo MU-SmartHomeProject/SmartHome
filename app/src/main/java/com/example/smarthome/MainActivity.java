@@ -131,20 +131,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
-
-    public void runProfilePage(View v) {
-        if(loggedIn == -1)
-            Toast.makeText(this, "Not logged in!", Toast.LENGTH_SHORT).show();
-        else {
-            Intent intent = new Intent(this, ProfilePageActivity.class);
-            intent.putExtra("loggedInUser", loggedIn);
-            startActivity(intent);
-        }
-    }
-
-    public void logIn(View v) {
-        Toast.makeText(this, "Successful Log In", Toast.LENGTH_SHORT).show();
-
-        loggedIn = 1; //User 1
-    }
 }
