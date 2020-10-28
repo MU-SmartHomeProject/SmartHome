@@ -16,6 +16,10 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".CreateAccountActivity" />
+        <activity android:name=".ForgotPageActivity" />
+        <activity android:name=".LogInPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
