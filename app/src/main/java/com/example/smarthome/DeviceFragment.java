@@ -113,5 +113,13 @@ public class DeviceFragment extends Fragment {
                 textViewNoDevice.setVisibility(View.GONE);
             }
         }
+        else {
+            progressBar.setVisibility(View.GONE);
+            if (list.size() == 0) {
+                textViewNoDevice.setVisibility(View.VISIBLE);
+            } else {
+                textViewNoDevice.setVisibility(View.GONE);
+            }
+        }
     }
 }
