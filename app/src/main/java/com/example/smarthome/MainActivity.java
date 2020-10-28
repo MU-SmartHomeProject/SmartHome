@@ -7,10 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -19,21 +21,10 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    /*
-        Test User 1
-        Email: testaccount@email.com
-        Username: testUser
-        Password: abc123
-
-        Test User 2
-        Email: testaccount2@email.com
-        Username: testUser2
-        Password: abc123
-     */
-
     private int loggedIn;
     private Button profileBtn;
     private UserDBHelper db;
+    private TextView navUsername, navEmail;
     private DrawerLayout drawer;
 
     @Override
@@ -56,7 +47,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         profileBtn = (Button)findViewById(R.id.profile_page_btn);
         db = new UserDBHelper(this);
-        loggedIn = -1;
+        loggedIn = getIntent().getIntExtra("loggedInUser", 0);
+
+        Cursor cursor = db.getUser(loggedIn); //Get logged in user from database
+        cursor.moveToFirst();
+
+        navUsername = navigationView.getHeaderView(0).findViewById(R.id.navUsername);
+        navUsername.setText(cursor.getString(2)); //Set username
+
+        navEmail = navigationView.getHeaderView(0).findViewById(R.id.navEmail);
+        navEmail.setText(cursor.getString(1)); //Set email
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -105,6 +105,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                                Toast.makeText(getApplicationContext(), "Deleted Successfully", Toast.LENGTH_SHORT).show();
 //                                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
 //                                startActivity(intent);
+
+                                Toast.makeText(getApplicationContext(), "Logged Out Successfully", Toast.LENGTH_SHORT).show();
+
+                                LogInPageActivity lg = new LogInPageActivity();
+                                lg.loggedOut();
+
+                                Intent intent = new Intent(getApplicationContext(), LogInPageActivity.class);
+                                startActivity(intent);
                             }
                         })
                         .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
@@ -136,19 +144,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    public void runProfilePage(View v) {
-        if(loggedIn == -1)
-            Toast.makeText(this, "Not logged in!", Toast.LENGTH_SHORT).show();
-        else {
-            Intent intent = new Intent(this, ProfilePageActivity.class);
-            intent.putExtra("loggedInUser", loggedIn);
-            startActivity(intent);
-        }
-    }
-
-    public void logIn(View v) {
-        Toast.makeText(this, "Successful Log In", Toast.LENGTH_SHORT).show();
-
-        loggedIn = 1; //User 1
+    public int getLoggedIn() {
+        return loggedIn;
     }
 }

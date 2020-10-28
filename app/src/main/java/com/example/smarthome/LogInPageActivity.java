@@ -44,11 +44,11 @@ public class LogInPageActivity extends AppCompatActivity {
         editor = sp.edit();
 
         if(sp.getInt("User", 0) != 0)
-            runProfilePage();
+            runMainPage();
     }
 
-    public void runProfilePage() {
-        Intent intent = new Intent(this, ProfilePageActivity.class);
+    public void runMainPage() {
+        Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("loggedInUser", sp.getInt("User", 0));
         startActivity(intent);
     }
@@ -68,7 +68,7 @@ public class LogInPageActivity extends AppCompatActivity {
                 loggedIn = Integer.parseInt(cursor.getString(0));
 
                 editor.putInt("User", loggedIn).commit();
-                runProfilePage();
+                runMainPage();
             }
             else { //password doesn't match
                 Toast.makeText(this, "Incorrect Password", Toast.LENGTH_SHORT).show();
