@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new ProfileFragment(loggedIn)).commit();
+                    new ProfileFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_profile);
         }
     }
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()) {
             case R.id.nav_profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileFragment(loggedIn)).commit();
+                        new ProfileFragment()).commit();
                 break;
 
             case R.id.nav_device:
@@ -142,5 +142,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             super.onBackPressed();
         }
+    }
+
+    public int getLoggedIn() {
+        return loggedIn;
     }
 }

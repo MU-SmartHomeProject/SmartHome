@@ -27,16 +27,17 @@ public class ProfileFragment extends Fragment {
     private int loggedIn;
     Cursor cursor;
 
-    public ProfileFragment(int log)
+    /*public ProfileFragment(int log)
     {
         loggedIn = log;
-    }
+    }*/
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        loggedIn = ((MainActivity)getActivity()).getLoggedIn();
         chngUsername = (Button) v.findViewById(R.id.chngUsr);
         chngUsername.setOnClickListener(handle1);
 
@@ -57,6 +58,7 @@ public class ProfileFragment extends Fragment {
 
         cursor = db.getUser(loggedIn);
         cursor.moveToFirst();
+
         //Set email text
         email.setText(cursor.getString(1));
         //Set username text
@@ -70,7 +72,7 @@ public class ProfileFragment extends Fragment {
         public void onClick(View view) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, new UsernameUpdateFragment(loggedIn)).commit();
+            fragmentTransaction.replace(R.id.fragment_container, new UsernameUpdateFragment()).commit();
         }
     };
 
@@ -79,7 +81,7 @@ public class ProfileFragment extends Fragment {
         public void onClick(View view) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, new EmailUpdateFragment(loggedIn)).commit();
+            fragmentTransaction.replace(R.id.fragment_container, new EmailUpdateFragment()).commit();
         }
     };
 
@@ -88,7 +90,7 @@ public class ProfileFragment extends Fragment {
         public void onClick(View view) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, new PasswordUpdateFragment(loggedIn)).commit();
+            fragmentTransaction.replace(R.id.fragment_container, new PasswordUpdateFragment()).commit();
         }
     };
 

@@ -24,15 +24,12 @@ public class UsernameUpdateFragment extends Fragment implements View.OnClickList
     private UserDBHelper db;
     Cursor cursor;
 
-    public UsernameUpdateFragment(int log)
-    {
-        loggedIn = log;
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_change_username, container, false);
+
+        loggedIn = ((MainActivity)getActivity()).getLoggedIn();
 
         ((Button) v.findViewById(R.id.updateBtn)).setOnClickListener(this);
 
@@ -65,7 +62,7 @@ public class UsernameUpdateFragment extends Fragment implements View.OnClickList
 
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, new ProfileFragment(loggedIn)).commit();
+            fragmentTransaction.replace(R.id.fragment_container, new ProfileFragment()).commit();
         }
     }
 }
