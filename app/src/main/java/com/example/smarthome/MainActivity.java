@@ -7,10 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private int loggedIn;
     private Button profileBtn;
     private UserDBHelper db;
+    private TextView navUsername, navEmail;
     private DrawerLayout drawer;
 
     @Override
@@ -45,6 +48,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         profileBtn = (Button)findViewById(R.id.profile_page_btn);
         db = new UserDBHelper(this);
         loggedIn = getIntent().getIntExtra("loggedInUser", 0);
+
+        Cursor cursor = db.getUser(loggedIn); //Get logged in user from database
+        cursor.moveToFirst();
+
+        navUsername = navigationView.getHeaderView(0).findViewById(R.id.navUsername);
+        navUsername.setText(cursor.getString(2)); //Set username
+
+        navEmail = navigationView.getHeaderView(0).findViewById(R.id.navEmail);
+        navEmail.setText(cursor.getString(1)); //Set email
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
