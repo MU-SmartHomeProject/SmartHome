@@ -40,7 +40,7 @@
                 android:text="@string/latLbl"
                 android:textSize="24sp" />
 
-            <TextView
+            <EditText
                 android:id="@+id/latTxt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
                 android:text="@string/lonLbl"
                 android:textSize="24sp" />
 
-            <TextView
+            <EditText
                 android:id="@+id/lonTxt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -78,6 +78,15 @@
                 android:text="@string/lonTxt"
                 android:textSize="24sp" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/locateBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/locateBtn" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

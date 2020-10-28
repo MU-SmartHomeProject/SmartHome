@@ -33,6 +33,7 @@
     <string name="latTxt">Lat</string>
     <string name="lonTxt">Lon</string>
     <string name="locationLbl">Your Location</string>
+    <string name="locateBtn">Get Location</string>
 
     <!--    Initilize help lists -->
     <string-array name="HelpList">
