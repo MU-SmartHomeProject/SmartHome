@@ -3,8 +3,8 @@
     package="com.example.smarthome">
 
     <!--For accessing data of devices from admin app -->
-    <uses-permission android:name="android.permission.permRead" />
-    <uses-permission android:name="android.permission.permWrite" />
+<!--    <uses-permission android:name="android.permission.permRead" />-->
+<!--    <uses-permission android:name="android.permission.permWrite" />-->
 
     <application
         android:allowBackup="true"

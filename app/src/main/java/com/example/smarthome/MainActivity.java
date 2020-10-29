@@ -73,6 +73,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new ProfileFragment()).commit();
                 break;
 
+            case R.id.nav_weather:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new WeatherFragment()).commit();
+                break;
+
             case R.id.nav_device:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new DeviceFragment()).commit();

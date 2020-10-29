@@ -10,6 +10,10 @@
             android:title="Profile" />
 
         <item
+            android:id="@+id/nav_weather"
+            android:icon="@drawable/ic_location"
+            android:title="Weather" />
+        <item
             android:id="@+id/nav_device"
             android:icon="@drawable/ic_device"
             android:title="Devices" />
