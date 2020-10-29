@@ -85,14 +85,14 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textViewSlider1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="8dp"
                 android:text="Intensity" />
 
             <SeekBar
-                android:id="@+id/seekBarDeviceIntensity"
+                android:id="@+id/seekBar1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:max="100"
@@ -117,14 +117,14 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/textViewSlider2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="8dp"
                 android:text="Color      " />
 
             <SeekBar
-                android:id="@+id/seekBarDeviceColor"
+                android:id="@+id/seekBar2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:max="100"

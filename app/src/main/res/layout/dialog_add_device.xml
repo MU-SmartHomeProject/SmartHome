@@ -64,7 +64,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="8dp"
-            android:text="Status" />
+            android:text="Status"
+            android:visibility="gone" />
 
         <View
             android:id="@+id/view3"
@@ -74,24 +75,26 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="4dp"
-            android:background="#7E7E7E" />
+            android:background="#7E7E7E"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textViewSlider1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="8dp"
                 android:text="Intensity" />
 
             <SeekBar
-                android:id="@+id/seekBarDeviceIntensity"
+                android:id="@+id/seekBar1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:max="100"
@@ -106,24 +109,26 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="4dp"
-            android:background="#7E7E7E" />
+            android:background="#7E7E7E"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/textViewSlider2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="8dp"
                 android:text="Color      " />
 
             <SeekBar
-                android:id="@+id/seekBarDeviceColor"
+                android:id="@+id/seekBar2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:max="100"

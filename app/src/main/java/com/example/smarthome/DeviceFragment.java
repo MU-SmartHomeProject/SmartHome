@@ -35,8 +35,6 @@ import com.example.smarthome.Model.Device;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class DeviceFragment extends Fragment {
 
@@ -200,8 +198,8 @@ public class DeviceFragment extends Fragment {
         final EditText editTextName = dialogView.findViewById(R.id.editTextDeviceName);
         final Spinner spinnerType = dialogView.findViewById(R.id.spinnerDeviceType);
         final Switch switchStatus = dialogView.findViewById(R.id.switchDeviceStatus);
-        final SeekBar seekBarIntensity = dialogView.findViewById(R.id.seekBarDeviceIntensity);
-        final SeekBar seekBarColor  = dialogView.findViewById(R.id.seekBarDeviceColor);
+        final SeekBar seekBarIntensity = dialogView.findViewById(R.id.seekBar1);
+        final SeekBar seekBarColor  = dialogView.findViewById(R.id.seekBar2);
 
         switchStatus.setEnabled(false);
         seekBarIntensity.setEnabled(false);
