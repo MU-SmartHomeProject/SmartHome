@@ -2,6 +2,7 @@ package com.example.smarthome;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -42,6 +43,9 @@ public class CreateAccountActivity extends AppCompatActivity {
                 else {
                     db.insertData(username.getText().toString(), email.getText().toString(), password.getText().toString());
                     Toast.makeText(this, "Account Successfully Created", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(this, LogInPageActivity.class);
+                    startActivity(intent);
                 }
             }
             else {
