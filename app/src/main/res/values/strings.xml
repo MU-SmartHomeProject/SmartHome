@@ -37,11 +37,24 @@
 
     <!--    Initilize help lists -->
     <string-array name="HelpList">
-            <item>Click on signup page from home page or profile page.</item>
-            <item>Then, login to your profile.</item>
-            <item>Then, go to devices from navbar on left.</item>
-            <item>Then you can costomize your devices.</item>
+        <item>Click on signup page from home page or profile page.</item>
+        <item>Then, login to your profile.</item>
+        <item>Then, go to devices from navbar on left.</item>
+        <item>Then you can costomize your devices.</item>
     </string-array>
+
+    <string-array name="device_type">
+        <item>Select</item>
+        <item>Power</item>
+        <item>Wiring Accessories</item>
+        <item>Lighting</item>
+        <item>Climate</item>
+        <item>Security</item>
+        <item>Blinds</item>
+        <item>Other</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

@@ -4,8 +4,8 @@
 
 
     <!--For accessing data of devices from admin app -->
-    <uses-permission android:name="android.permission.permRead" />
-    <uses-permission android:name="android.permission.permWrite" />
+<!--    <uses-permission android:name="android.permission.permRead" />-->
+<!--    <uses-permission android:name="android.permission.permWrite" />-->
 
     <!--For accessing location of device -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
