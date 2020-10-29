@@ -28,6 +28,12 @@
     <string name="nav_log_out">Are you sure, you want to logout?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="latLbl">Latitude:</string>
+    <string name="lonLbl">Longitude:</string>
+    <string name="latTxt"></string>
+    <string name="lonTxt"></string>
+    <string name="locationLbl">Your Location</string>
+    <string name="locateBtn">Get Location</string>
 
     <!--    Initilize help lists -->
     <string-array name="HelpList">
