@@ -1,6 +1,5 @@
 package com.example.smarthome;
 
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
@@ -27,9 +26,11 @@ public class DetailActivity extends AppCompatActivity {
 
     TextView textViewDeviceName;
     TextView textViewDeviceType;
+    TextView textViewSlider1;
+    TextView textViewSlider2;
     Switch switchStatus;
-    SeekBar seekBarIntensity;
-    SeekBar seekBarColor;
+    SeekBar seekBar1;
+    SeekBar seekBar2;
     LinearLayout linearLayout;
 
     boolean hasDataChanged = false;
@@ -53,12 +54,14 @@ public class DetailActivity extends AppCompatActivity {
         textViewDeviceName = findViewById(R.id.textViewDeviceName);
         textViewDeviceType = findViewById(R.id.textViewDeviceType);
         switchStatus = findViewById(R.id.switchDeviceStatus);
-        seekBarIntensity = findViewById(R.id.seekBarDeviceIntensity);
-        seekBarColor = findViewById(R.id.seekBarDeviceColor);
-
+        seekBar1 = findViewById(R.id.seekBar1);
+        seekBar2 = findViewById(R.id.seekBar2);
+        textViewSlider1 = findViewById(R.id.textViewSlider1);
+        textViewSlider2 = findViewById(R.id.textViewSlider2);
         linearLayout = findViewById(R.id.linearLayoutSaving);
 
 
+        setSlider(device);
         // Set values from db to views
         textViewDeviceName.setText(device.getName());
         textViewDeviceType.setText(device.getType());
@@ -68,8 +71,8 @@ public class DetailActivity extends AppCompatActivity {
         else
             switchStatus.setChecked(false);
 
-        seekBarIntensity.setProgress(device.getIntensity());
-        seekBarColor.setProgress(device.getColor());
+        seekBar1.setProgress(device.getIntensity());
+        seekBar2.setProgress(device.getColor());
 
 
         switchStatus.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +82,7 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        seekBarColor.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        seekBar2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
@@ -97,7 +100,7 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        seekBarIntensity.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        seekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
@@ -116,6 +119,37 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void setSlider(Device device) {
+
+        switch (device.getType()){
+            case "Air Conditioner":
+                textViewSlider1.setText("Fan speed");
+                textViewSlider2.setText("Temperature");
+                break;
+
+            case "Blinds":
+                textViewSlider1.setVisibility(View.GONE);
+                textViewSlider2.setVisibility(View.GONE);
+                seekBar1.setVisibility(View.GONE);
+                seekBar2.setVisibility(View.GONE);
+
+                break;
+
+            case "Fan":
+                textViewSlider1.setText("speed");
+                textViewSlider2.setVisibility(View.GONE);
+                seekBar2.setVisibility(View.GONE);
+
+                break;
+
+            case "Lightings":
+                textViewSlider1.setText("Intensity");
+                textViewSlider2.setText("Color");
+                break;
+
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -180,8 +214,8 @@ public class DetailActivity extends AppCompatActivity {
         values.put(Constants.DEVICE_NAME, textViewDeviceName.getText().toString());
         values.put(Constants.DEVICE_TYPE, textViewDeviceType.getText().toString());
         values.put(Constants.DEVICE_STATUS, deviceStatus);
-        values.put(Constants.DEVICE_INTENSITY, seekBarIntensity.getProgress());
-        values.put(Constants.DEVICE_COLOR, seekBarColor.getProgress());
+        values.put(Constants.DEVICE_INTENSITY, seekBar1.getProgress());
+        values.put(Constants.DEVICE_COLOR, seekBar2.getProgress());
 
         String where = Constants.DEVICE_ID + " = " + device.getId();
 
