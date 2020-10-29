@@ -91,6 +91,7 @@ public class LocationFragment extends Fragment {
         }
     }
 
+
     @SuppressLint("MissingPermission")
     public void getLocation() {
         fusedLocationClient.getLastLocation()

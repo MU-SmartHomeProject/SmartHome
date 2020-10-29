@@ -51,6 +51,7 @@ public class LogInPageActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("loggedInUser", sp.getInt("User", 0));
         startActivity(intent);
+        finish();
     }
 
     public void logIn(View v) {
