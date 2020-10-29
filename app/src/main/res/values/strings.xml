@@ -30,8 +30,8 @@
     <string name="no">No</string>
     <string name="latLbl">Latitude:</string>
     <string name="lonLbl">Longitude:</string>
-    <string name="latTxt">Lat</string>
-    <string name="lonTxt">Lon</string>
+    <string name="latTxt"></string>
+    <string name="lonTxt"></string>
     <string name="locationLbl">Your Location</string>
     <string name="locateBtn">Get Location</string>
 
