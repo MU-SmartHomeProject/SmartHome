@@ -2,6 +2,7 @@ package com.example.smarthome;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,8 +42,12 @@ public class ForgotPageActivity extends AppCompatActivity {
             if(cursor1.getString(1).equals(email.getText().toString())) {
                 boolean update = db.updateData(Integer.parseInt(cursor.getString(0)), cursor1.getString(2), cursor1.getString(1), password.getText().toString());
 
-                if(update)
-                    Toast.makeText(this,"Password Reset", Toast.LENGTH_SHORT).show();
+                if(update) {
+                    Toast.makeText(this, "Password Reset", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(this, LogInPageActivity.class);
+                    startActivity(intent);
+                }
                 else
                     Toast.makeText(this,"Password Not Reset", Toast.LENGTH_SHORT).show();
             }
