@@ -22,7 +22,6 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private int loggedIn;
-    private Button profileBtn;
     private UserDBHelper db;
     private TextView navUsername, navEmail;
     private DrawerLayout drawer;
@@ -45,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        profileBtn = (Button)findViewById(R.id.profile_page_btn);
         db = new UserDBHelper(this);
         loggedIn = getIntent().getIntExtra("loggedInUser", 0);
 
