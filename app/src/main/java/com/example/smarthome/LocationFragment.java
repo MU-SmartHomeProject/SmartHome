@@ -42,7 +42,7 @@ import java.util.Locale;
 public class LocationFragment extends Fragment {
 
     private Button locate;
-    private EditText lat, lon;
+    private TextView lat, lon;
     private FusedLocationProviderClient fusedLocationClient;
 
     @Nullable
