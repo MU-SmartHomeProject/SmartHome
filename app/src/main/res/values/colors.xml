@@ -6,4 +6,10 @@
     <color name="colorWhite">#f4f4f4</color>
     <color name="colorBlack">#1a1c20</color>
     <color name="hintColor">#797a7e</color>
+
+    <color name="color1">#28abb9</color>
+    <color name="color2">#2d6187</color>
+    <color name="color3">#effad3</color>
+    <color name="color4">#a8dda8</color>
+
 </resources>

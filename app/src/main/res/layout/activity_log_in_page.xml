@@ -4,71 +4,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color1"
     tools:context=".LogInPageActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/rounded_corner"
+        android:backgroundTint="@color/color2"
         android:orientation="vertical"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/UsernameLogIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:autofillHints=""
+            android:background="@drawable/rounded_corner"
+            android:backgroundTint="@color/color3"
+            android:ems="10"
+            android:hint="@string/username_txt"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:textColorHint="@color/hintColor" />
+
+        <EditText
+            android:id="@+id/PasswordLogIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:autofillHints=""
+            android:background="@drawable/rounded_corner"
+            android:backgroundTint="@color/color3"
+            android:ems="10"
+            android:hint="@string/password_txt"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:textColorHint="@color/hintColor" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="4dp"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/UsernameLbl"
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
-                android:text="@string/username_txt" />
-
-            <EditText
-                android:id="@+id/UsernameLogIn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="@string/username_txt"
-                android:inputType="textPersonName" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                android:text="Dont have an account? "
+                android:textColor="@color/color3" />
 
             <TextView
-                android:id="@+id/PasswordLbl"
+                android:id="@+id/CreateAccountLbl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
-                android:text="@string/password_label" />
-
-            <EditText
-                android:id="@+id/PasswordLogIn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="@string/password_txt"
-                android:inputType="textPassword" />
+                android:onClick="makeAccount"
+                android:text="@string/create_account_lbl"
+                android:textColor="@color/color3"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <Button
@@ -77,18 +77,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
+            android:background="@drawable/rounded_corner"
+            android:backgroundTint="@color/color4"
             android:onClick="logIn"
             android:text="@string/main_log_in_btn" />
-
-        <TextView
-            android:id="@+id/CreateAccountLbl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:onClick="makeAccount"
-            android:text="@string/create_account_lbl"
-            android:textColor="#3F51B5" />
 
         <TextView
             android:id="@+id/ForgotPasswordLbl"
@@ -100,7 +92,8 @@
             android:layout_marginBottom="10dp"
             android:onClick="forgot"
             android:text="@string/forgot_password_lbl"
-            android:textColor="#3F51B5" />
+            android:textColor="#3F51B5"
+            android:visibility="gone" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,6 +33,9 @@ public class DetailActivity extends AppCompatActivity {
     SeekBar seekBar2;
     LinearLayout linearLayout;
 
+    LinearLayout linearLayout1;
+    LinearLayout linearLayout2;
+
     boolean hasDataChanged = false;
 
     DatabaseHelper dbHelper;
@@ -59,6 +62,8 @@ public class DetailActivity extends AppCompatActivity {
         textViewSlider1 = findViewById(R.id.textViewSlider1);
         textViewSlider2 = findViewById(R.id.textViewSlider2);
         linearLayout = findViewById(R.id.linearLayoutSaving);
+        linearLayout1 = findViewById(R.id.linearLayout1);
+        linearLayout2 = findViewById(R.id.linearLayout2);
 
 
         setSlider(device);
@@ -130,17 +135,14 @@ public class DetailActivity extends AppCompatActivity {
                 break;
 
             case "Blinds":
-                textViewSlider1.setVisibility(View.GONE);
-                textViewSlider2.setVisibility(View.GONE);
-                seekBar1.setVisibility(View.GONE);
-                seekBar2.setVisibility(View.GONE);
+               linearLayout1.setVisibility(View.GONE);
+               linearLayout2.setVisibility(View.GONE);
 
                 break;
 
             case "Fan":
                 textViewSlider1.setText("speed");
-                textViewSlider2.setVisibility(View.GONE);
-                seekBar2.setVisibility(View.GONE);
+                linearLayout2.setVisibility(View.GONE);
 
                 break;
 
