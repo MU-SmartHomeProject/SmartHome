@@ -8,6 +8,7 @@
     tools:context=".WeatherFragment">
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -57,14 +58,15 @@
             android:layout_height="wrap_content"
             android:text="Main"
             android:textColor="#FFFFFF"
-            android:textSize="36sp" />
+            android:textSize="16sp" />
 
 
         <TextView
             android:id="@+id/todayDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Description"/>
+            android:text="Description"
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:id="@+id/todayPressure"
@@ -102,17 +104,28 @@
             android:id="@+id/todaySunrise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Sunrise: 00:00"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:text="Sunrise: 00:00"/>
+            android:textSize="16sp" />
+      
         <TextView
             android:id="@+id/todaySunset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Sunset: 00:00"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:text="Sunset: 00:00"/>
+            android:textSize="16sp"/>
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBarWeather"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

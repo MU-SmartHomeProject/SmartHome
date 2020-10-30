@@ -1,7 +1,13 @@
 package com.example.smarthome;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -9,7 +15,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,6 +31,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DecimalFormat;
+import java.util.Date;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -45,6 +58,7 @@ public class WeatherFragment extends Fragment {
     TextView textViewWindRotation;
     TextView textViewSunrise;
     TextView textViewSunset;
+    ProgressBar progressBar;
 
 
     String name;
@@ -61,7 +75,10 @@ public class WeatherFragment extends Fragment {
     long sunrise;
     long sunset;
 
+    double lat = 51.507351, lon = -0.127758;
+
     boolean hasDataLoaded = false;
+    private FusedLocationProviderClient fusedLocationClient;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -115,7 +132,7 @@ public class WeatherFragment extends Fragment {
                 OkHttpClient client = new OkHttpClient();
 
                 Request request = new Request.Builder()
-                        .url("http://api.openweathermap.org/data/2.5/weather?lat=51.507351&lon=-0.127758&appid=76f5a39d4f2ad0b3982fae450c3ab0cb")
+                        .url("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&appid=76f5a39d4f2ad0b3982fae450c3ab0cb")
                         .get()
                         .addHeader("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
                         .addHeader("x-rapidapi-key", "76f5a39d4f2ad0b3982fae450c3ab0cb")
@@ -210,41 +227,98 @@ public class WeatherFragment extends Fragment {
         return df.format((kelvin - 273.15));
     }
 
+    String EpochTimeToLocalTime(long epoch){
+        Date date = new Date(epoch);
+        String time = date.getHours()+":"+date.getMinutes();
+        return time;
+    };
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
+        switch (requestCode) {
+            case 1:
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getLocation();
+                }  else {
+                    Toast.makeText(getContext(),"Access Denied - Cannot access location", Toast.LENGTH_SHORT).show();
+                }
+                return;
+        }
+    }
+
+
+    @SuppressLint("MissingPermission")
+    public void getLocation() {
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            lat = location.getLatitude();
+                            lon = location.getLongitude();
+                        }
+                    }
+                });
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
         View view = inflater.inflate(R.layout.fragment_weather, container, false);
 
-        textViewTemperature = view.findViewById(R.id.todayTemperature);
-        textViewFeelLike = view.findViewById(R.id.todayTemperatureFeelLike);
-        textViewTempMin = view.findViewById(R.id.todayTemperatureMin);
-        textViewTempMax = view.findViewById(R.id.todayTemperatureMax);
-        textViewMain = view.findViewById(R.id.todayMain);
-        textViewDescription = view.findViewById(R.id.todayDescription);
-        textViewPressure = view.findViewById(R.id.todayPressure);
-        textViewHumidity = view.findViewById(R.id.todayHumidity);
-        textViewWindSpeed = view.findViewById(R.id.todayWindSpeed);
-        textViewWindRotation = view.findViewById(R.id.todayWindRotation);
-        textViewSunrise = view.findViewById(R.id.todaySunrise);
-        textViewSunset = view.findViewById(R.id.todaySunset);
+        if (ContextCompat.checkSelfPermission(
+                getContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED) {
 
-        getWeatherData();
+            getLocation();
+
+            textViewTemperature = view.findViewById(R.id.todayTemperature);
+            textViewFeelLike = view.findViewById(R.id.todayTemperatureFeelLike);
+            textViewTempMin = view.findViewById(R.id.todayTemperatureMin);
+            textViewTempMax = view.findViewById(R.id.todayTemperatureMax);
+            textViewMain = view.findViewById(R.id.todayMain);
+            textViewDescription = view.findViewById(R.id.todayDescription);
+            textViewPressure = view.findViewById(R.id.todayPressure);
+            textViewHumidity = view.findViewById(R.id.todayHumidity);
+            textViewWindSpeed = view.findViewById(R.id.todayWindSpeed);
+            textViewWindRotation = view.findViewById(R.id.todayWindRotation);
+            textViewSunrise = view.findViewById(R.id.todaySunrise);
+            textViewSunset = view.findViewById(R.id.todaySunset);
+            progressBar = view.findViewById(R.id.progressBarWeather);
+
+            getWeatherData();
+
+            if(hasDataLoaded){
+                progressBar.setVisibility(View.GONE);
+            }
+
+            textViewTemperature.setText(kelvinToCelsius(temp) + "°C");
+            textViewFeelLike.setText("Feel like: " + kelvinToCelsius(feels_like) + "°C");
+            textViewTempMin.setText("Temp Min: " + kelvinToCelsius(temp_min) + "°C");
+            textViewTempMax.setText("Temp Max: " + kelvinToCelsius(temp_max) + "°C");
+            textViewMain.setText("Main: " + mainStr);
+            textViewDescription.setText("Description: " + description);
+            textViewPressure.setText("Pressure: " + pressure + " hpa");
+            textViewHumidity.setText("Humidity: " + humidity + " %");
+            textViewWindSpeed.setText("Wind speed: " + speed + " m/s");
+            textViewWindRotation.setText("Wind rotation: " + deg + "°");
+            textViewSunrise.setText("Sunrise: " + EpochTimeToLocalTime(sunrise));
+            textViewSunset.setText("Sunset: " + EpochTimeToLocalTime(sunset));
+
+        } else {
+            // You can directly ask for the permission.
+            // The registered ActivityResultCallback gets the result of this request.
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, 1);
+        }
 
 
-        textViewTemperature.setText(kelvinToCelsius(temp) + "°C");
-        textViewFeelLike.setText("Feel like: " + kelvinToCelsius(feels_like) + "°C");
-        textViewTempMin.setText("Temp Min: " + kelvinToCelsius(temp_min) + "°C");
-        textViewTempMax.setText("Temp Max: " + kelvinToCelsius(temp_max) + "°C");
-        textViewMain.setText("Main: " + mainStr);
-        textViewDescription.setText("Description: " + description);
-        textViewPressure.setText("Pressure: " + pressure + " hpa");
-        textViewHumidity.setText("Humidity: " + humidity + " %");
-        textViewWindSpeed.setText("Wind speed: " + speed + " m/s");
-        textViewWindRotation.setText("Wind rotation: " + deg + "°");
-        textViewSunrise.setText("Sunrise: " + sunrise);
-        textViewSunset.setText("Sunset: " + sunset);
 
 
         // Inflate the layout for this fragment
