@@ -75,9 +75,10 @@ public class WeatherFragment extends Fragment {
     long sunrise;
     long sunset;
 
-    double lat = 51.507351, lon = -0.127758;
+    double lat = 0, lon = 0;
 
     boolean hasDataLoaded = false;
+    int fiveTimes = 5;
     private FusedLocationProviderClient fusedLocationClient;
 
 
@@ -204,12 +205,12 @@ public class WeatherFragment extends Fragment {
                         Log.i("abcde", "" + temp + " " + sunrise);
 
 
-                        if (!hasDataLoaded) {
+                        if (fiveTimes > 0) {
                             // Refresh the fragment
                             Fragment frg = getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_container);
                             FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                             fragmentTransaction.detach(frg).attach(frg).commit();
-                            hasDataLoaded = true;
+                            fiveTimes--;
                         }
                         Log.i("abcde", data.toString());
 
@@ -298,7 +299,7 @@ public class WeatherFragment extends Fragment {
 
             getWeatherData();
 
-            if(hasDataLoaded){
+            if(fiveTimes == 0){
                 progressBar.setVisibility(View.GONE);
             }
 
