@@ -145,76 +145,80 @@ public class WeatherFragment extends Fragment {
                     e.printStackTrace();
                 }
 
-                ResponseBody responseBody = response.body();
 
-                InputStream in = responseBody.byteStream();
-                InputStreamReader inputStreamReader = new InputStreamReader(in);
+                if(response != null) {
 
-                StringBuilder data = new StringBuilder();
-                int inputStreamData = 0;
-                try {
-                    inputStreamData = inputStreamReader.read();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                while (inputStreamData != -1) {
-                    char current = (char) inputStreamData;
                     try {
-                        inputStreamData = inputStreamReader.read();
-                    } catch (IOException e) {
+                        ResponseBody responseBody = response.body();
+
+                        InputStream in = responseBody.byteStream();
+                        InputStreamReader inputStreamReader = new InputStreamReader(in);
+
+                        StringBuilder data = new StringBuilder();
+                        int inputStreamData = 0;
+                        try {
+                            inputStreamData = inputStreamReader.read();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        while (inputStreamData != -1) {
+                            char current = (char) inputStreamData;
+                            try {
+                                inputStreamData = inputStreamReader.read();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            data.append(current);
+                        }
+
+                        JSONObject body = new JSONObject(data.toString());
+
+                        name = body.getString("name");
+
+                        JSONArray weather = body.getJSONArray("weather");
+
+                        JSONObject jsonObject1 = weather.getJSONObject(0);
+
+                        mainStr = jsonObject1.getString("main");
+                        description = jsonObject1.getString("description");
+
+                        JSONObject main = body.getJSONObject("main");
+
+                        temp = main.getDouble("temp");
+                        feels_like = main.getDouble("feels_like");
+                        temp_min = main.getDouble("temp_min");
+                        temp_max = main.getDouble("temp_max");
+                        pressure = main.getInt("pressure");
+                        humidity = main.getInt("humidity");
+
+                        JSONObject wind = body.getJSONObject("wind");
+
+                        speed = wind.getDouble("speed");
+                        deg = wind.getInt("deg");
+
+                        JSONObject sys = body.getJSONObject("sys");
+
+                        sunrise = sys.getLong("sunrise");
+                        sunset = sys.getLong("sunset");
+
+                        Log.i("abcde", "" + temp + " " + sunrise);
+
+
+                        if (!hasDataLoaded) {
+                            // Refresh the fragment
+                            Fragment frg = getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+                            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                            fragmentTransaction.detach(frg).attach(frg).commit();
+                            hasDataLoaded = true;
+                        }
+                        Log.i("abcde", data.toString());
+
+
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    data.append(current);
                 }
 
-                try {
-                    JSONObject body = new JSONObject(data.toString());
-
-                    name = body.getString("name");
-
-                    JSONArray weather = body.getJSONArray("weather");
-
-                    JSONObject jsonObject1 = weather.getJSONObject(0);
-
-                    mainStr = jsonObject1.getString("main");
-                    description = jsonObject1.getString("description");
-
-                    JSONObject main = body.getJSONObject("main");
-
-                    temp = main.getDouble("temp");
-                    feels_like = main.getDouble("feels_like");
-                    temp_min = main.getDouble("temp_min");
-                    temp_max = main.getDouble("temp_max");
-                    pressure = main.getInt("pressure");
-                    humidity = main.getInt("humidity");
-
-                    JSONObject wind = body.getJSONObject("wind");
-
-                    speed = wind.getDouble("speed");
-                    deg = wind.getInt("deg");
-
-                    JSONObject sys = body.getJSONObject("sys");
-
-                    sunrise = sys.getLong("sunrise");
-                    sunset = sys.getLong("sunset");
-
-                    Log.i("abcde", "" + temp + " " + sunrise);
-
-
-                    if(!hasDataLoaded){
-                        // Refresh the fragment
-                        Fragment frg = getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-                        FragmentTransaction fragmentTransaction =getActivity().getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.detach(frg).attach(frg).commit();
-                        hasDataLoaded = true;
-                    }
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                Log.i("abcde", data.toString());
             }
         });
 
