@@ -180,7 +180,9 @@ public class DetailActivity extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         database = dbHelper.getWritableDatabase();
-                        long result = database.delete(Constants.DEVICE_TABLE, "id = " + device.getId(), null);
+
+                        String where = Constants.DEVICE_ID +" = "+ device.getId()+" AND "+Constants.USER_NAME +" = "+"\"" +MainActivity.currentUser+"\"";
+                        long result = database.delete(Constants.DEVICE_TABLE, where, null);
 
                         if (result == -1) {
                             Toast.makeText(DetailActivity.this, "Some error occurred", Toast.LENGTH_SHORT).show();
