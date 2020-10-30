@@ -18,6 +18,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="17dp"
             android:layout_marginRight="17dp"
+            android:layout_marginTop="10dp"
             android:text="Info: Smart Home Application is a simple student project of unit ICT376. It is developed by 3 students in a group."
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -41,14 +42,6 @@
             >
         </ListView>
 
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@android:id/list"
-            android:layout_marginTop="40dp"
-            android:text="Click to login" />
-
     </RelativeLayout>
 
     <TextView
@@ -57,7 +50,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="33dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
         android:text="Welcome to help Fragment"
-        android:textSize="30sp" />
+        android:textSize="27sp" />
 
 </RelativeLayout>
