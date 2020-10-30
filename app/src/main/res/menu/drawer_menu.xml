@@ -34,10 +34,6 @@
             android:title="Share" />
 
         <item
-            android:id="@+id/nav_test"
-            android:title="Test" />
-
-        <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_logouts"
             android:title="Log out" />

@@ -94,10 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_share:
-                Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_test:
-                Toast.makeText(this, "Test success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Share function is comming soon.", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_logout:
                 final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -140,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             new androidx.appcompat.app.AlertDialog.Builder(this)
                     .setTitle("Exit")
-                    .setMessage("Are you sure you want to exit?")
+                    .setMessage("Are you sure you want to exit from smart home?")
 
                     // Specifying a listener allows you to take an action before dismissing the dialog.
                     // The dialog is automatically dismissed when a dialog button is clicked.
