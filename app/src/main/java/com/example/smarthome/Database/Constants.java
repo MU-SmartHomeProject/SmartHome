@@ -12,12 +12,14 @@ public class Constants {
     // Fields for device table
     public static final String DEVICE_TABLE = "devices";
 
+    public static final String USER_NAME        = "username";
     public static final String DEVICE_ID        = "id";
     public static final String DEVICE_NAME      = "name";
     public static final String DEVICE_TYPE      = "type";
     public static final String DEVICE_STATUS    = "status";
     public static final String DEVICE_INTENSITY = "intensity";
     public static final String DEVICE_COLOR     = "color";
+
 
 
 }

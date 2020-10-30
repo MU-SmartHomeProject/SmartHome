@@ -19,6 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_DEVICE_TABLE =
             "CREATE TABLE " + Constants.DEVICE_TABLE + "("
                     + Constants.DEVICE_ID          + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + Constants.USER_NAME          + " TEXT, "
                     + Constants.DEVICE_NAME        + " TEXT, "
                     + Constants.DEVICE_TYPE        + " TEXT, "
                     + Constants.DEVICE_STATUS      + " INTEGER, "

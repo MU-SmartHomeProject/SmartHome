@@ -31,7 +31,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -233,10 +235,19 @@ public class WeatherFragment extends Fragment {
     }
 
     String EpochTimeToLocalTime(long epoch){
-        Date date = new Date(epoch);
-        String time = date.getHours()+":"+date.getMinutes();
-        return time;
+        Date date = new Date(1604062357);
+        SimpleDateFormat DateFor = new SimpleDateFormat("HH:mm a", Locale.getDefault());
+        Log.i("abcdef", DateFor.format(date));
+        return DateFor.format(date);
     };
+
+
+    public static String EpochToDate(long epochSecond, String formatString) {
+        long epochMillisecond = epochSecond*1000;
+        SimpleDateFormat format = new SimpleDateFormat(formatString, Locale.getDefault());
+        return format.format(new Date(epochMillisecond));
+
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
@@ -313,8 +324,8 @@ public class WeatherFragment extends Fragment {
             textViewHumidity.setText("Humidity: " + humidity + " %");
             textViewWindSpeed.setText("Wind speed: " + speed + " m/s");
             textViewWindRotation.setText("Wind rotation: " + deg + "°");
-            textViewSunrise.setText("Sunrise: " + EpochTimeToLocalTime(sunrise));
-            textViewSunset.setText("Sunset: " + EpochTimeToLocalTime(sunset));
+            textViewSunrise.setText("Sunrise: " + EpochToDate(sunrise, "hh:mm a"));
+            textViewSunset.setText("Sunset: " + EpochToDate(sunset,"hh:mm a"));
 
         } else {
             // You can directly ask for the permission.

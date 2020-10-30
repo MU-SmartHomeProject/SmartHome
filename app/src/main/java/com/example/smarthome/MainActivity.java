@@ -23,6 +23,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static String currentUser = "";
     private int loggedIn;
     private UserDBHelper db;
     private TextView navUsername, navEmail;
@@ -53,7 +54,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         cursor.moveToFirst();
 
         navUsername = navigationView.getHeaderView(0).findViewById(R.id.navUsername);
-        navUsername.setText(cursor.getString(2)); //Set username
+        currentUser = cursor.getString(2);
+        navUsername.setText(currentUser); //Set username
 
         navEmail = navigationView.getHeaderView(0).findViewById(R.id.navEmail);
         navEmail.setText(cursor.getString(1)); //Set email

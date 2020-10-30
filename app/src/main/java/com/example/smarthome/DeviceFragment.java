@@ -116,33 +116,41 @@ public class DeviceFragment extends Fragment {
         Cursor cursor;
 
         if (database != null) {
-            cursor = database.rawQuery("SELECT * FROM " + Constants.DEVICE_TABLE, null);
-            list.clear();
+            try {
+                String query = "SELECT * FROM " + Constants.DEVICE_TABLE +" where "+Constants.USER_NAME + " = " + "\""+ MainActivity.currentUser+"\"";
+                Log.i("looooo", query);
+                cursor = database.rawQuery(query,null);
+                list.clear();
 
-            if (cursor.moveToFirst()) {
-                do {
+                if (cursor.moveToFirst()) {
+                    do {
 
-                    int id = cursor.getInt(cursor.getColumnIndex(Constants.DEVICE_ID));
-                    String deviceName = cursor.getString(cursor.getColumnIndex(Constants.DEVICE_NAME));
-                    String deviceType = cursor.getString(cursor.getColumnIndex(Constants.DEVICE_TYPE));
-                    int status = cursor.getInt(cursor.getColumnIndex(Constants.DEVICE_STATUS));
-                    int intensity = cursor.getInt(cursor.getColumnIndex(Constants.DEVICE_INTENSITY));
-                    int color = cursor.getInt(cursor.getColumnIndex(Constants.DEVICE_COLOR));
+                        int id = cursor.getInt(cursor.getColumnIndex(Constants.DEVICE_ID));
+                        String deviceName = cursor.getString(cursor.getColumnIndex(Constants.DEVICE_NAME));
+                        String deviceType = cursor.getString(cursor.getColumnIndex(Constants.DEVICE_TYPE));
+                        int status = cursor.getInt(cursor.getColumnIndex(Constants.DEVICE_STATUS));
+                        int intensity = cursor.getInt(cursor.getColumnIndex(Constants.DEVICE_INTENSITY));
+                        int color = cursor.getInt(cursor.getColumnIndex(Constants.DEVICE_COLOR));
 
-                    list.add(new Device(id, deviceName, deviceType, status, intensity, color));
+                        list.add(new Device(id, deviceName, deviceType, status, intensity, color));
 
-                } while (cursor.moveToNext());
+                    } while (cursor.moveToNext());
+                }
+                progressBar.setVisibility(View.GONE);
+                if (list.size() == 0) {
+                    textViewNoDevice.setVisibility(View.VISIBLE);
+                } else {
+                    textViewNoDevice.setVisibility(View.GONE);
+                }
+
+                adapter.notifyDataSetChanged();
+                cursor.close();
+                database.close();
             }
-            progressBar.setVisibility(View.GONE);
-            if (list.size() == 0) {
-                textViewNoDevice.setVisibility(View.VISIBLE);
-            } else {
-                textViewNoDevice.setVisibility(View.GONE);
+            catch (Exception e){
+                Log.i("ERROR**", e.toString());
             }
 
-            adapter.notifyDataSetChanged();
-            cursor.close();
-            database.close();
         }
         Log.i("abcde", "fun"+ " "+list.size());
 
@@ -264,6 +272,7 @@ public class DeviceFragment extends Fragment {
 
             //prepare the transaction information that will be saved to the database
             ContentValues values = new ContentValues();
+            values.put(Constants.USER_NAME, MainActivity.currentUser);
             values.put(Constants.DEVICE_NAME, device.getName());
             values.put(Constants.DEVICE_TYPE, device.getType());
             values.put(Constants.DEVICE_STATUS, device.getStatus());
