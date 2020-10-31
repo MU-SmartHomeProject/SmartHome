@@ -49,7 +49,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-
+        // get the selected device via intent
         device = (Device) getIntent().getSerializableExtra("device");
 
         dbHelper = new DatabaseHelper(this);
@@ -66,8 +66,8 @@ public class DetailActivity extends AppCompatActivity {
         linearLayout2 = findViewById(R.id.linearLayout2);
 
 
+        // Prepare the screen to show the current status of device
         setSlider(device);
-        // Set values from db to views
         textViewDeviceName.setText(device.getName());
         textViewDeviceType.setText(device.getType());
 
@@ -126,6 +126,8 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
+
+    // Sets the sliders according to the device selected
     private void setSlider(Device device) {
 
         switch (device.getType()){
@@ -202,6 +204,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
 
+    // This function updates the value in database
     void updateValues() {
         linearLayout.setVisibility(View.VISIBLE);
         database = dbHelper.getWritableDatabase();
@@ -213,13 +216,12 @@ public class DetailActivity extends AppCompatActivity {
             deviceStatus = 0;
         }
 
-
         ContentValues values = new ContentValues();
         values.put(Constants.DEVICE_NAME, textViewDeviceName.getText().toString());
         values.put(Constants.DEVICE_TYPE, textViewDeviceType.getText().toString());
         values.put(Constants.DEVICE_STATUS, deviceStatus);
-        values.put(Constants.DEVICE_INTENSITY, seekBar1.getProgress());
-        values.put(Constants.DEVICE_COLOR, seekBar2.getProgress());
+        values.put(Constants.DEVICE_SEEK_BAR1, seekBar1.getProgress());
+        values.put(Constants.DEVICE_SEEK_BAR2, seekBar2.getProgress());
 
         String where = Constants.DEVICE_ID + " = " + device.getId();
 

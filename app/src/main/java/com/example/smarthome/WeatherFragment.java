@@ -79,7 +79,6 @@ public class WeatherFragment extends Fragment {
 
     double lat = 0, lon = 0;
 
-    boolean hasDataLoaded = false;
     int fiveTimes = 5;
     private FusedLocationProviderClient fusedLocationClient;
 
@@ -123,6 +122,7 @@ public class WeatherFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        // get weather data from internet
         getWeatherData();
     }
 
@@ -134,6 +134,7 @@ public class WeatherFragment extends Fragment {
             public void run() {
                 OkHttpClient client = new OkHttpClient();
 
+                // Create an API request
                 Request request = new Request.Builder()
                         .url("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&appid=76f5a39d4f2ad0b3982fae450c3ab0cb")
                         .get()
@@ -143,6 +144,7 @@ public class WeatherFragment extends Fragment {
 
                 Response response = null;
                 try {
+                    // Execute the request and get the response
                     response = client.newCall(request).execute();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -152,6 +154,8 @@ public class WeatherFragment extends Fragment {
                 if(response != null) {
 
                     try {
+
+                        // read the the response
                         ResponseBody responseBody = response.body();
 
                         InputStream in = responseBody.byteStream();
@@ -164,6 +168,7 @@ public class WeatherFragment extends Fragment {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+
                         while (inputStreamData != -1) {
                             char current = (char) inputStreamData;
                             try {
@@ -174,7 +179,10 @@ public class WeatherFragment extends Fragment {
                             data.append(current);
                         }
 
+                        // Create JSON object from response
                         JSONObject body = new JSONObject(data.toString());
+
+                        //Extract necessary attributes from response
 
                         name = body.getString("name");
 
@@ -204,9 +212,9 @@ public class WeatherFragment extends Fragment {
                         sunrise = sys.getLong("sunrise");
                         sunset = sys.getLong("sunset");
 
-                        Log.i("abcde", "" + temp + " " + sunrise);
 
 
+                        // update at least 5 times to get the correct data
                         if (fiveTimes > 0) {
                             // Refresh the fragment
                             Fragment frg = getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_container);
@@ -214,7 +222,6 @@ public class WeatherFragment extends Fragment {
                             fragmentTransaction.detach(frg).attach(frg).commit();
                             fiveTimes--;
                         }
-                        Log.i("abcde", data.toString());
 
 
                     } catch (JSONException e) {
@@ -228,22 +235,18 @@ public class WeatherFragment extends Fragment {
         thread.start();
     }
 
+    // Function to convert Kelvin temperature to Celsius Temperature
     String kelvinToCelsius(double kelvin) {
-
+        // Formatting the temperature to one decimal place only
         DecimalFormat df = new DecimalFormat("#.0");
         return df.format((kelvin - 273.15));
     }
 
-    String EpochTimeToLocalTime(long epoch){
-        Date date = new Date(1604062357);
-        SimpleDateFormat DateFor = new SimpleDateFormat("HH:mm a", Locale.getDefault());
-        Log.i("abcdef", DateFor.format(date));
-        return DateFor.format(date);
-    };
-
-
+    // To convert Epoch time to easily understandable time
     public static String EpochToDate(long epochSecond, String formatString) {
+        // converting epoch seconds to epoch milliseconds
         long epochMillisecond = epochSecond*1000;
+        //Create the format of time
         SimpleDateFormat format = new SimpleDateFormat(formatString, Locale.getDefault());
         return format.format(new Date(epochMillisecond));
 
@@ -288,6 +291,7 @@ public class WeatherFragment extends Fragment {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
         View view = inflater.inflate(R.layout.fragment_weather, container, false);
 
+        // check for location permission
         if (ContextCompat.checkSelfPermission(
                 getContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED) {
@@ -328,14 +332,10 @@ public class WeatherFragment extends Fragment {
             textViewSunset.setText("Sunset: " + EpochToDate(sunset,"hh:mm a"));
 
         } else {
-            // You can directly ask for the permission.
-            // The registered ActivityResultCallback gets the result of this request.
+            //request for location permission
             ActivityCompat.requestPermissions(getActivity(),
                     new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, 1);
         }
-
-
-
 
         // Inflate the layout for this fragment
         return view;
