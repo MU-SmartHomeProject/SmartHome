@@ -20,7 +20,7 @@
     <string name="password_txt">Password</string>
     <string name="update_btn">Update</string>
     <string name="create_account_lbl">Create Account</string>
-    <string name="forgot_password_lbl">Forgot Password</string>
+    <string name="forgot_password_lbl">Reset</string>
     <string name="reset_password_btn">Reset Password</string>
     <string name="create_account_btn">Create Account</string>
     <string name="navigation_drawer_open">navigation_drawer_open</string>
