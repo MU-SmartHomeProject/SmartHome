@@ -11,9 +11,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "smartHomeManager.db";
     private static final int DATABASE_VERSION = 1;
-
     private static final String SQL_TAG = "SQL_ERROR";
-
 
     //String to create a customer table
     private static final String CREATE_DEVICE_TABLE =
@@ -23,8 +21,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     + Constants.DEVICE_NAME        + " TEXT, "
                     + Constants.DEVICE_TYPE        + " TEXT, "
                     + Constants.DEVICE_STATUS      + " INTEGER, "
-                    + Constants.DEVICE_INTENSITY   + " INTEGER, "
-                    + Constants.DEVICE_COLOR       + " INTEGER "+ ")";
+                    + Constants.DEVICE_SEEK_BAR1   + " INTEGER, "
+                    + Constants.DEVICE_SEEK_BAR2   + " INTEGER "+ ")";
 
 
     public DatabaseHelper(@Nullable Context context) {
@@ -35,6 +33,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
         try{
+            // we run the query to create the database
             sqLiteDatabase.execSQL(CREATE_DEVICE_TABLE);
         }catch (Exception e){
             Log.d(SQL_TAG, e.toString());

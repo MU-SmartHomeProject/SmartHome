@@ -1,6 +1,5 @@
 package com.example.smarthome;
 
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -49,7 +48,6 @@ public class DeviceFragment extends Fragment {
     DatabaseHelper dbHelper;
     SQLiteDatabase database;
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +59,7 @@ public class DeviceFragment extends Fragment {
     public void onStart() {
         super.onStart();
         try {
+            //Refresh the data when we get back to this fragment from another fragment or activity
             getDataFromDatabase();
         }catch (Exception e){
             Log.i("ERROR**", e.toString());
@@ -93,6 +92,7 @@ public class DeviceFragment extends Fragment {
             @Override
             public void onItemClick(int position, View v) {
                 Intent intent = new Intent(getContext(), DetailActivity.class);
+                // putting the clicked device info in intent to receive it activity and show its details and modify or delete it
                 intent.putExtra("device", list.get(position));
                 startActivity(intent);
             }
@@ -103,7 +103,6 @@ public class DeviceFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         getDataFromDatabase();
-        Log.i("abcde", "flow");
 
         return view;
 
@@ -118,7 +117,6 @@ public class DeviceFragment extends Fragment {
         if (database != null) {
             try {
                 String query = "SELECT * FROM " + Constants.DEVICE_TABLE +" where "+Constants.USER_NAME + " = " + "\""+ MainActivity.currentUser+"\"";
-                Log.i("looooo", query);
                 cursor = database.rawQuery(query,null);
                 list.clear();
 
@@ -129,8 +127,8 @@ public class DeviceFragment extends Fragment {
                         String deviceName = cursor.getString(cursor.getColumnIndex(Constants.DEVICE_NAME));
                         String deviceType = cursor.getString(cursor.getColumnIndex(Constants.DEVICE_TYPE));
                         int status = cursor.getInt(cursor.getColumnIndex(Constants.DEVICE_STATUS));
-                        int intensity = cursor.getInt(cursor.getColumnIndex(Constants.DEVICE_INTENSITY));
-                        int color = cursor.getInt(cursor.getColumnIndex(Constants.DEVICE_COLOR));
+                        int intensity = cursor.getInt(cursor.getColumnIndex(Constants.DEVICE_SEEK_BAR1));
+                        int color = cursor.getInt(cursor.getColumnIndex(Constants.DEVICE_SEEK_BAR2));
 
                         list.add(new Device(id, deviceName, deviceType, status, intensity, color));
 
@@ -152,50 +150,7 @@ public class DeviceFragment extends Fragment {
             }
 
         }
-        Log.i("abcde", "fun"+ " "+list.size());
-
     }
-
-    void getDevices(){
-        ContentResolver contentResolver = getContext().getContentResolver();
-        Cursor cursor = contentResolver.query(Constants.CONTENT_URI, null,null,null,null);
-        list.clear();
-        if(cursor != null){
-            if (cursor.moveToFirst()) {
-                do {
-
-                    int id = cursor.getInt(cursor.getColumnIndex(Constants.DEVICE_ID));
-                    String deviceName = cursor.getString(cursor.getColumnIndex(Constants.DEVICE_NAME));
-                    String deviceType = cursor.getString(cursor.getColumnIndex(Constants.DEVICE_TYPE));
-                    int status = cursor.getInt(cursor.getColumnIndex(Constants.DEVICE_STATUS));
-                    int intensity = cursor.getInt(cursor.getColumnIndex(Constants.DEVICE_INTENSITY));
-                    int color = cursor.getInt(cursor.getColumnIndex(Constants.DEVICE_COLOR));
-
-                    list.add(new Device(id, deviceName, deviceType, status, intensity, color));
-
-
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-            adapter.notifyDataSetChanged();
-
-            progressBar.setVisibility(View.GONE);
-            if (list.size() == 0) {
-                textViewNoDevice.setVisibility(View.VISIBLE);
-            } else {
-                textViewNoDevice.setVisibility(View.GONE);
-            }
-        }
-        else {
-            progressBar.setVisibility(View.GONE);
-            if (list.size() == 0) {
-                textViewNoDevice.setVisibility(View.VISIBLE);
-            } else {
-                textViewNoDevice.setVisibility(View.GONE);
-            }
-        }
-    }
-
 
     private void showAddDeviceDialog() {
         final AlertDialog builder = new AlertDialog.Builder(getContext()).create();
@@ -221,7 +176,7 @@ public class DeviceFragment extends Fragment {
             public void onClick(View view) {
                 boolean shouldProceed = true;
 
-
+                // Show error if required fields are left empty
                 if (TextUtils.isEmpty(editTextName.getText())) {
                     editTextName.setError("Device name is required!");
                     shouldProceed = false;
@@ -232,8 +187,6 @@ public class DeviceFragment extends Fragment {
                     shouldProceed = false;
                 }
 
-
-
                 if (shouldProceed) {
                     String name = editTextName.getText().toString().trim();
                     String type = spinnerType.getSelectedItem().toString();
@@ -243,7 +196,9 @@ public class DeviceFragment extends Fragment {
                         deviceStatus = 1;   //ON
                     }
 
+                    //Create a device object
                     Device device = new Device(1, name, type, deviceStatus, seekBarIntensity.getProgress(), seekBarColor.getProgress());
+                    // Insert the device object in database
                     addDeviceToDatabase(device);
 
                     builder.dismiss();
@@ -259,7 +214,6 @@ public class DeviceFragment extends Fragment {
             }
         });
 
-
         builder.setView(dialogView);
         builder.show();
     }
@@ -270,14 +224,14 @@ public class DeviceFragment extends Fragment {
 
         if (database != null) {
 
-            //prepare the transaction information that will be saved to the database
+            //prepare the device information that will be saved to the database
             ContentValues values = new ContentValues();
             values.put(Constants.USER_NAME, MainActivity.currentUser);
             values.put(Constants.DEVICE_NAME, device.getName());
             values.put(Constants.DEVICE_TYPE, device.getType());
             values.put(Constants.DEVICE_STATUS, device.getStatus());
-            values.put(Constants.DEVICE_INTENSITY, device.getIntensity());
-            values.put(Constants.DEVICE_COLOR, device.getColor());
+            values.put(Constants.DEVICE_SEEK_BAR1, device.getIntensity());
+            values.put(Constants.DEVICE_SEEK_BAR2, device.getColor());
 
             long result = database.insert(Constants.DEVICE_TABLE, null, values);
 
@@ -286,7 +240,6 @@ public class DeviceFragment extends Fragment {
             } else {
                 Toast.makeText(getContext(), "Device added successfully", Toast.LENGTH_SHORT).show();
                 databaseUpdated();
-                //onBackPressed();
             }
         }
         if (database != null) {

@@ -24,7 +24,6 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.MyViewHold
         TextView textViewType;
         TextView textViewStatus;
 
-
         MyViewHolder(View view) {
             super(view);
             view.setOnClickListener(this);
@@ -59,7 +58,6 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.MyViewHold
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_device, parent, false);
-
         return new MyViewHolder(view);
     }
 
