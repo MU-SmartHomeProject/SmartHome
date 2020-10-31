@@ -29,6 +29,7 @@ public class PasswordUpdateFragment extends Fragment implements View.OnClickList
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_change_password, container, false);
 
+        //set logged in
         loggedIn = ((MainActivity)getActivity()).getLoggedIn();
 
         ((Button) v.findViewById(R.id.updateBtn2)).setOnClickListener(this);
@@ -47,16 +48,19 @@ public class PasswordUpdateFragment extends Fragment implements View.OnClickList
     @Override
     public void onClick(View view) {
         cursor.moveToFirst();
+        //call databases update method
         boolean updated = db.updateData(Integer.parseInt(cursor.getString(0)),cursor.getString(2), cursor.getString(1), passwordField.getText().toString());
 
+        //if update successful
         if(updated){
             Toast.makeText(getContext(), "Successfully Updated", Toast.LENGTH_SHORT).show();
 
+            //change fragment back to profile fragment
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, new ProfileFragment()).commit();
         }
-        else
+        else //if update unsuccessful
             Toast.makeText(getContext(), "Updated Unsuccessful", Toast.LENGTH_SHORT).show();
     }
 }

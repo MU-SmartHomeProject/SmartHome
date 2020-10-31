@@ -27,16 +27,13 @@ public class ProfileFragment extends Fragment {
     private int loggedIn;
     Cursor cursor;
 
-    /*public ProfileFragment(int log)
-    {
-        loggedIn = log;
-    }*/
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        //Initialise variables
         loggedIn = ((MainActivity)getActivity()).getLoggedIn();
         chngUsername = (Button) v.findViewById(R.id.chngUsr);
         chngUsername.setOnClickListener(handle1);
@@ -70,6 +67,7 @@ public class ProfileFragment extends Fragment {
     View.OnClickListener handle1 = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            //Start update username fragment
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, new UsernameUpdateFragment()).commit();
@@ -79,6 +77,7 @@ public class ProfileFragment extends Fragment {
     View.OnClickListener handle2 = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            //Start update email fragment
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, new EmailUpdateFragment()).commit();
@@ -88,6 +87,7 @@ public class ProfileFragment extends Fragment {
     View.OnClickListener handle3 = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            //Start update password fragment
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, new PasswordUpdateFragment()).commit();
@@ -97,39 +97,44 @@ public class ProfileFragment extends Fragment {
     View.OnClickListener handle4 = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            //Alert the user as to whether or not they want to delete account
             AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
             alert.setCancelable(false);
             alert.setTitle("Delete Account");
             alert.setMessage("Are you sure you want to delete?");
 
+            //if they chose yes
             alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    int deleted = db.deleteData(loggedIn);
+                    int deleted = db.deleteData(loggedIn); //delete logged in user from db
 
+                    //delete successful
                     if(deleted > 0) {
                         Toast.makeText(getContext(), "Account Deleted", Toast.LENGTH_SHORT).show();
 
                         LogInPageActivity lg = new LogInPageActivity();
-                        lg.loggedOut();
+                        lg.loggedOut(); //Log out user
 
+                        //Return to log in page
                         Intent intent = new Intent(getContext(), LogInPageActivity.class);
                         startActivity(intent);
                     }
-                    else
+                    else //unsuccessful
                         Toast.makeText(getContext(),"Account Not Deleted", Toast.LENGTH_SHORT).show();
                 }
             });
 
+            //if they chose no
             alert.setNegativeButton("no", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-
+                    //do nothing
                 }
             });
 
             AlertDialog dialog = alert.create();
-            dialog.show();
+            dialog.show(); //Show alert
         }
     };
 

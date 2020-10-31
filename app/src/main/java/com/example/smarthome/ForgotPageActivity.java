@@ -22,6 +22,7 @@ public class ForgotPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_page);
 
+        //Initialise variables
         db = new UserDBHelper(this);
         username = (EditText)findViewById(R.id.UsernameLogIn);
         email = (EditText)findViewById(R.id.emailLogin);
@@ -30,7 +31,7 @@ public class ForgotPageActivity extends AppCompatActivity {
     }
 
     public void resetPassword(View v) {
-        Cursor cursor = db.checkUsername(username.getText().toString());
+        Cursor cursor = db.checkUsername(username.getText().toString()); //check database for matching username to users input
         cursor.moveToFirst();
 
         //If username found in database
