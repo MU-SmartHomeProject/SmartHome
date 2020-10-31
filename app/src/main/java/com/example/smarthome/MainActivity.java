@@ -47,18 +47,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        //Initialise database
         db = new UserDBHelper(this);
+        //Get the logged in user via intent passed from log in activity
         loggedIn = getIntent().getIntExtra("loggedInUser", 0);
 
         Cursor cursor = db.getUser(loggedIn); //Get logged in user from database
         cursor.moveToFirst();
 
         navUsername = navigationView.getHeaderView(0).findViewById(R.id.navUsername);
-        currentUser = cursor.getString(2);
-        navUsername.setText(currentUser); //Set username
+        currentUser = cursor.getString(2); //get logged in users username from database
+        navUsername.setText(currentUser); //Set username in nav bar
 
-        navEmail = navigationView.getHeaderView(0).findViewById(R.id.navEmail);
-        navEmail.setText(cursor.getString(1)); //Set email
+        navEmail = navigationView.getHeaderView(0).findViewById(R.id.navEmail); //get logged in users email from database
+        navEmail.setText(cursor.getString(1)); //Set email in nav bar
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -110,11 +112,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
 //                                startActivity(intent);
 
+                                //Display log out message
                                 Toast.makeText(getApplicationContext(), "Logged Out Successfully", Toast.LENGTH_SHORT).show();
 
+                                //Create a log in page activity variable
                                 LogInPageActivity lg = new LogInPageActivity();
-                                lg.loggedOut();
+                                lg.loggedOut(); //call the LogInPageActivity log out method
 
+                                //Start a new LogInPageActivity
                                 Intent intent = new Intent(getApplicationContext(), LogInPageActivity.class);
                                 startActivity(intent);
                                 finish();

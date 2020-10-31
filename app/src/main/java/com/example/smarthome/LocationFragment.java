@@ -39,6 +39,9 @@ import java.nio.file.FileSystems;
 import java.util.List;
 import java.util.Locale;
 
+/*
+* Code lines 61-114 retrieved from: https://developer.android.com/training/location/retrieve-current
+*/
 public class LocationFragment extends Fragment {
 
     private Button locate;
@@ -50,6 +53,7 @@ public class LocationFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_location, container, false);
 
+        //Initialise variables
         locate = view.findViewById(R.id.locateBtn);
         lat = view.findViewById(R.id.latTxt);
         lon = view.findViewById(R.id.lonTxt);
@@ -100,6 +104,7 @@ public class LocationFragment extends Fragment {
                     public void onSuccess(Location location) {
                         // Got last known location. In some rare situations this can be null.
                         if (location != null) {
+                            //Set latitude and longitude text
                             lat.setText(Double.toString(location.getLatitude()));
                             lon.setText(Double.toString(location.getLongitude()));
                         }

@@ -25,6 +25,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
     }
 
+    //Create user database
     @Override
     public void onCreate(SQLiteDatabase database) {
         database.execSQL("CREATE TABLE " + USERS_TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT, EMAIL TEXT UNIQUE, USERNAME TEXT UNIQUE, PASSWORD TEXT)");
@@ -36,6 +37,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
         onCreate(database);
     }
 
+    //insert a user
     public boolean insertData(String username, String email, String password) {
         SQLiteDatabase database = this.getWritableDatabase();
 
@@ -52,6 +54,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
             return true; //Data inserted
     }
 
+    //update a users details
     public boolean updateData(int id, String username, String email, String password) {
         SQLiteDatabase database = this.getWritableDatabase();
 
@@ -66,6 +69,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    //check for a username in the db
     public Cursor checkUsername(String username) {
         SQLiteDatabase database = this.getWritableDatabase();
 
@@ -73,6 +77,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    //check for a password in the db
     public Cursor checkPassword(String password) {
         SQLiteDatabase database = this.getWritableDatabase();
 
@@ -80,6 +85,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    //check for an email in the db
     public Cursor checkEmail(String email) {
         SQLiteDatabase database = this.getWritableDatabase();
 
@@ -87,6 +93,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    //remove a user from the db
     public int deleteData(int id) {
         SQLiteDatabase database = this.getWritableDatabase();
 
@@ -94,6 +101,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
         return database.delete(USERS_TABLE_NAME, "ID = ?", new String[]{Integer.toString(id)});
     }
 
+    //return all details about a user based on their id
     public Cursor getUser(int id) {
         SQLiteDatabase database = this.getWritableDatabase();
 

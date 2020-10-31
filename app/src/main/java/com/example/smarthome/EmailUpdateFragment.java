@@ -29,8 +29,10 @@ public class EmailUpdateFragment extends Fragment implements View.OnClickListene
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_change_email, container, false);
 
+        //User MainActivity getLoggedIn method to set loggedIn
         loggedIn = ((MainActivity)getActivity()).getLoggedIn();
 
+        //Initialise variables
         ((Button) v.findViewById(R.id.updateBtn1)).setOnClickListener(this);
 
         emailField = (EditText) v.findViewById(R.id.user_email_txt);
@@ -49,7 +51,7 @@ public class EmailUpdateFragment extends Fragment implements View.OnClickListene
         cursor.moveToFirst();
 
         Cursor check = db.checkEmail(emailField.getText().toString());
-        int icheck = check.getCount();
+        int icheck = check.getCount(); //Get count of number of emails matching users input for email
 
         //If entered username not same as current username
         //And number of usernames same as entered username are greater than 0

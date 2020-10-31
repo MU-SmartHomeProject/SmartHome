@@ -29,8 +29,10 @@ public class UsernameUpdateFragment extends Fragment implements View.OnClickList
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_change_username, container, false);
 
+        //get logged in
         loggedIn = ((MainActivity)getActivity()).getLoggedIn();
 
+        //Initialise variables
         ((Button) v.findViewById(R.id.updateBtn)).setOnClickListener(this);
 
         usernameField = (EditText) v.findViewById(R.id.username_txt_update);
@@ -49,7 +51,7 @@ public class UsernameUpdateFragment extends Fragment implements View.OnClickList
         cursor.moveToFirst();
 
         Cursor check = db.checkUsername(usernameField.getText().toString());
-        int icheck = check.getCount();
+        int icheck = check.getCount(); //Check how many usernames matched users input
 
         //If entered username not same as current username
         //And number of usernames same as entered username are greater than 0
@@ -60,6 +62,7 @@ public class UsernameUpdateFragment extends Fragment implements View.OnClickList
             Toast.makeText(getContext(), "Successfully Updated", Toast.LENGTH_SHORT).show();
             db.updateData(Integer.parseInt(cursor.getString(0)), usernameField.getText().toString(), cursor.getString(1), cursor.getString(3));
 
+            //Start profile page fragment
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, new ProfileFragment()).commit();

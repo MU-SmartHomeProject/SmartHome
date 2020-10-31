@@ -33,6 +33,7 @@ public class LogInPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in_page);
 
+        //Initialise variables
         login = (Button)findViewById(R.id.LogInBtn);
         username = (EditText)findViewById(R.id.UsernameLogIn);
         password = (EditText)findViewById(R.id.PasswordLogIn);
@@ -43,19 +44,21 @@ public class LogInPageActivity extends AppCompatActivity {
         sp = getSharedPreferences("preferences", MODE_PRIVATE);
         editor = sp.edit();
 
+        //If shared preferences value for user is 0 (logged in)
         if(sp.getInt("User", 0) != 0)
             runMainPage();
     }
 
     public void runMainPage() {
+        //start new main activity
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("loggedInUser", sp.getInt("User", 0));
+        intent.putExtra("loggedInUser", sp.getInt("User", 0)); //pass logged in user
         startActivity(intent);
         finish();
     }
 
     public void logIn(View v) {
-        Cursor cursor = db.checkUsername(username.getText().toString());
+        Cursor cursor = db.checkUsername(username.getText().toString()); //Check username in database
         cursor.moveToFirst();
 
         //If username found in database
@@ -66,9 +69,9 @@ public class LogInPageActivity extends AppCompatActivity {
             //if password matches stored password
             if(cursor1.getString(3).equals(password.getText().toString())) {
                 Toast.makeText(this, "Successful Log In", Toast.LENGTH_SHORT).show();
-                loggedIn = Integer.parseInt(cursor.getString(0));
+                loggedIn = Integer.parseInt(cursor.getString(0)); //get logged in users id from database
 
-                editor.putInt("User", loggedIn).commit();
+                editor.putInt("User", loggedIn).commit(); //set shared preferences logged in
                 runMainPage();
             }
             else { //password doesn't match
