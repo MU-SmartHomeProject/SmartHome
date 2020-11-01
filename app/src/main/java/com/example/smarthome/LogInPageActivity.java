@@ -1,20 +1,16 @@
 package com.example.smarthome;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class LogInPageActivity extends AppCompatActivity {
 
@@ -28,6 +24,10 @@ public class LogInPageActivity extends AppCompatActivity {
     static SharedPreferences sp;
     static SharedPreferences.Editor editor;
 
+    /**
+     * oncreate method
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,14 +49,23 @@ public class LogInPageActivity extends AppCompatActivity {
             runMainPage();
     }
 
+    /**
+     * start run page activity
+     * pass logged in user
+     */
     public void runMainPage() {
-        //start new main activity
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("loggedInUser", sp.getInt("User", 0)); //pass logged in user
+        intent.putExtra("loggedInUser", sp.getInt("User", 0));
         startActivity(intent);
         finish();
     }
 
+    /**
+     * handle login on login event
+     * match user details with db
+     * Refuse login if user doesn't exist.
+     * @param v
+     */
     public void logIn(View v) {
         Cursor cursor = db.checkUsername(username.getText().toString()); //Check username in database
         cursor.moveToFirst();
@@ -83,16 +92,27 @@ public class LogInPageActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * calls forget password activity
+     * @param v
+     */
     public void forgot(View v) {
         Intent intent = new Intent(this, ForgotPageActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * calls make account activity
+     * @param v
+     */
     public void makeAccount(View v) {
         Intent intent = new Intent(this, CreateAccountActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * clear user from UI on logged out
+     */
     public void loggedOut() {
         editor.clear().commit();
     }

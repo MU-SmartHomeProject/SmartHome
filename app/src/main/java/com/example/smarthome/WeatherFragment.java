@@ -47,7 +47,6 @@ import okhttp3.ResponseBody;
  */
 public class WeatherFragment extends Fragment {
 
-
     TextView textViewTemperature;
     TextView textViewFeelLike;
     TextView textViewTempMin;
@@ -61,7 +60,6 @@ public class WeatherFragment extends Fragment {
     TextView textViewSunrise;
     TextView textViewSunset;
     ProgressBar progressBar;
-
 
     String name;
     String mainStr;
@@ -81,7 +79,6 @@ public class WeatherFragment extends Fragment {
 
     int fiveTimes = 5;
     private FusedLocationProviderClient fusedLocationClient;
-
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -114,6 +111,11 @@ public class WeatherFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * on create method
+     * get weather data from internet
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,19 +124,19 @@ public class WeatherFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        // get weather data from internet
         getWeatherData();
     }
 
-
+    /**
+     * Extract weather data using okhttpclient
+     * Create an API request
+     */
     void getWeatherData() {
 
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 OkHttpClient client = new OkHttpClient();
-
-                // Create an API request
                 Request request = new Request.Builder()
                         .url("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&appid=76f5a39d4f2ad0b3982fae450c3ab0cb")
                         .get()
@@ -150,11 +152,9 @@ public class WeatherFragment extends Fragment {
                     e.printStackTrace();
                 }
 
-
                 if(response != null) {
 
                     try {
-
                         // read the the response
                         ResponseBody responseBody = response.body();
 
@@ -223,7 +223,6 @@ public class WeatherFragment extends Fragment {
                             fiveTimes--;
                         }
 
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -235,14 +234,23 @@ public class WeatherFragment extends Fragment {
         thread.start();
     }
 
-    // Function to convert Kelvin temperature to Celsius Temperature
+    /**
+     * Function to convert Kelvin temperature to Celsius Temperature
+     * @param kelvin
+     * @return
+     */
     String kelvinToCelsius(double kelvin) {
         // Formatting the temperature to one decimal place only
         DecimalFormat df = new DecimalFormat("#.0");
         return df.format((kelvin - 273.15));
     }
 
-    // To convert Epoch time to easily understandable time
+    /**
+     * To convert Epoch time to easily understandable time
+     * @param epochSecond
+     * @param formatString
+     * @return
+     */
     public static String EpochToDate(long epochSecond, String formatString) {
         // converting epoch seconds to epoch milliseconds
         long epochMillisecond = epochSecond*1000;
@@ -252,6 +260,12 @@ public class WeatherFragment extends Fragment {
 
     }
 
+    /**
+     * request permission
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
                                            int[] grantResults) {
@@ -268,11 +282,17 @@ public class WeatherFragment extends Fragment {
         }
     }
 
-
+    /**
+     * get user location
+     */
     @SuppressLint("MissingPermission")
     public void getLocation() {
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                    /**
+                     * on success function
+                     * @param location
+                     */
                     @Override
                     public void onSuccess(Location location) {
                         // Got last known location. In some rare situations this can be null.
@@ -284,6 +304,14 @@ public class WeatherFragment extends Fragment {
                 });
     }
 
+    /**
+     * on create view method
+     * check for location permission
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return view
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -291,7 +319,6 @@ public class WeatherFragment extends Fragment {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
         View view = inflater.inflate(R.layout.fragment_weather, container, false);
 
-        // check for location permission
         if (ContextCompat.checkSelfPermission(
                 getContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED) {

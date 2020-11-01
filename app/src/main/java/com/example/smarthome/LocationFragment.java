@@ -48,6 +48,13 @@ public class LocationFragment extends Fragment {
     private TextView lat, lon;
     private FusedLocationProviderClient fusedLocationClient;
 
+    /**
+     * on location create view
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return view
+     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -79,6 +86,12 @@ public class LocationFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Ask for location request
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
                                            int[] grantResults) {
@@ -95,7 +108,9 @@ public class LocationFragment extends Fragment {
         }
     }
 
-
+    /**
+     * extract the current loaction of device
+     */
     @SuppressLint("MissingPermission")
     public void getLocation() {
         fusedLocationClient.getLastLocation()

@@ -1,15 +1,14 @@
 package com.example.smarthome;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ForgotPageActivity extends AppCompatActivity {
 
@@ -17,6 +16,10 @@ public class ForgotPageActivity extends AppCompatActivity {
     private Button reset;
     private UserDBHelper db;
 
+    /**
+     * oncreate method
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +33,10 @@ public class ForgotPageActivity extends AppCompatActivity {
         reset = (Button)findViewById(R.id.ResetBtn);
     }
 
+    /**
+     * handle reset password event
+     * @param v
+     */
     public void resetPassword(View v) {
         Cursor cursor = db.checkUsername(username.getText().toString()); //check database for matching username to users input
         cursor.moveToFirst();

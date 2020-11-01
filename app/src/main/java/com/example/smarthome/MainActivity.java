@@ -1,24 +1,21 @@
 package com.example.smarthome;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.smarthome.Database.Constants;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -29,6 +26,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TextView navUsername, navEmail;
     private DrawerLayout drawer;
 
+    /**
+     * oncreate method
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +71,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    /**
+     * handle nav item select event
+     *
+     * @param menuItem
+     * @return true
+     */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
@@ -106,15 +114,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 builder.setMessage(R.string.nav_log_out)
                         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-//                                Ryan Add logout logic here and direct them to login page.
-//                                mydb.deleteContact(id_To_Update);
-//                                Toast.makeText(getApplicationContext(), "Deleted Successfully", Toast.LENGTH_SHORT).show();
-//                                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-//                                startActivity(intent);
-
                                 //Display log out message
                                 Toast.makeText(getApplicationContext(), "Logged Out Successfully", Toast.LENGTH_SHORT).show();
-
                                 //Create a log in page activity variable
                                 LogInPageActivity lg = new LogInPageActivity();
                                 lg.loggedOut(); //call the LogInPageActivity log out method
@@ -136,31 +137,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    /**
+     * handle back press event
+     * Specifying a listener allows you to take an action before dismissing the dialog.
+     * The dialog is automatically dismissed when a dialog button is clicked.
+     * A null listener allows the button to dismiss the dialog and take no further action.
+     */
     @Override
     public void onBackPressed() {
-        if(drawer.isDrawerOpen(GravityCompat.START)) {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
 
         } else {
             new androidx.appcompat.app.AlertDialog.Builder(this)
-                    .setTitle("Exit")
-                    .setMessage("Are you sure you want to exit from smart home?")
-
-                    // Specifying a listener allows you to take an action before dismissing the dialog.
-                    // The dialog is automatically dismissed when a dialog button is clicked.
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            finish();
-                        }
-                    })
-
-                    // A null listener allows the button to dismiss the dialog and take no further action.
-                    .setNegativeButton(android.R.string.no, null)
-                    .show();
-
+                .setTitle("Exit")
+                .setMessage("Are you sure you want to exit from smart home?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .show();
         }
     }
 
+    /**
+     * @return loggedIn
+     */
     public int getLoggedIn() {
         return loggedIn;
     }

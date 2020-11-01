@@ -27,7 +27,16 @@ public class ProfileFragment extends Fragment {
     private int loggedIn;
     Cursor cursor;
 
-
+    /**
+     * oncreate view method
+     * Get db and loggedIn from MainActivity
+     * Set email text
+     * Set username text
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -50,15 +59,12 @@ public class ProfileFragment extends Fragment {
         username = (TextView) v.findViewById(R.id.username_txt);
         email = (TextView) v.findViewById(R.id.user_email_txt);
 
-        //Get db and loggedIn from MainActivity
         db = new UserDBHelper(getContext());
 
         cursor = db.getUser(loggedIn);
         cursor.moveToFirst();
 
-        //Set email text
         email.setText(cursor.getString(1));
-        //Set username text
         username.setText(cursor.getString(2));
 
         return v;
@@ -137,5 +143,4 @@ public class ProfileFragment extends Fragment {
             dialog.show(); //Show alert
         }
     };
-
 }

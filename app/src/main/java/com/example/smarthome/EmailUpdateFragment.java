@@ -2,13 +2,11 @@ package com.example.smarthome;
 
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +22,13 @@ public class EmailUpdateFragment extends Fragment implements View.OnClickListene
     private UserDBHelper db;
     Cursor cursor;
 
+    /**
+     * create views for email update fragment
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return v
+     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,6 +51,10 @@ public class EmailUpdateFragment extends Fragment implements View.OnClickListene
         return v;
     }
 
+    /**
+     * onclick handler for email update
+     * @param view
+     */
     @Override
     public void onClick(View view) {
         cursor.moveToFirst();

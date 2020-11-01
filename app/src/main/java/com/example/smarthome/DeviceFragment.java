@@ -48,6 +48,10 @@ public class DeviceFragment extends Fragment {
     DatabaseHelper dbHelper;
     SQLiteDatabase database;
 
+    /**
+     * on create method
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +70,13 @@ public class DeviceFragment extends Fragment {
         }
     }
 
+    /**
+     * on create view method
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return view
+     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -152,6 +163,9 @@ public class DeviceFragment extends Fragment {
         }
     }
 
+    /**
+     * show add device dialog function
+     */
     private void showAddDeviceDialog() {
         final AlertDialog builder = new AlertDialog.Builder(getContext()).create();
         LayoutInflater inflater = getLayoutInflater();
@@ -172,6 +186,10 @@ public class DeviceFragment extends Fragment {
         ImageView buttonCancel = dialogView.findViewById(R.id.imageViewCancel);
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
+            /**
+             * on click method for add device
+             * @param view
+             */
             @Override
             public void onClick(View view) {
                 boolean shouldProceed = true;
@@ -218,6 +236,10 @@ public class DeviceFragment extends Fragment {
         builder.show();
     }
 
+    /**
+     * add device to db using db helper
+     * @param device
+     */
     private void addDeviceToDatabase(Device device) {
 
         database = dbHelper.getWritableDatabase();
@@ -246,7 +268,6 @@ public class DeviceFragment extends Fragment {
             database.close();
         }
     }
-
 
     private void databaseUpdated() {
         getDataFromDatabase();

@@ -1,8 +1,5 @@
 package com.example.smarthome;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -10,12 +7,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class CreateAccountActivity extends AppCompatActivity {
 
     private EditText username, email, password;
     private Button create;
     private UserDBHelper db;
 
+    /**
+     * oncreate method
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,10 @@ public class CreateAccountActivity extends AppCompatActivity {
         create = (Button)findViewById(R.id.CreateBtn);
     }
 
+    /**
+     * create user account
+     * @param v
+     */
     public void createAccount(View v) {
         //check if the username entered by the user matches a username in the database
         Cursor cursor = db.checkUsername(username.getText().toString());

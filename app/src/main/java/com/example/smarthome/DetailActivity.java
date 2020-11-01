@@ -44,6 +44,11 @@ public class DetailActivity extends AppCompatActivity {
 
     Device device;
 
+    /**
+     * oncreate method
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,16 +111,30 @@ public class DetailActivity extends AppCompatActivity {
         });
 
         seekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            /**
+             * progress change tracker
+             * @param seekBar
+             * @param i
+             * @param b
+             */
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
             }
 
+            /**
+             * starts tracking touch method
+             * @param seekBar
+             */
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
 
             }
 
+            /**
+             * stop tracking touch method
+             * @param seekBar
+             */
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 
@@ -127,18 +146,22 @@ public class DetailActivity extends AppCompatActivity {
     }
 
 
-    // Sets the sliders according to the device selected
+    /**
+     * Sets the sliders according to the device selected
+     *
+     * @param device
+     */
     private void setSlider(Device device) {
 
-        switch (device.getType()){
+        switch (device.getType()) {
             case "Air Conditioner":
                 textViewSlider1.setText("Fan speed");
                 textViewSlider2.setText("Temperature");
                 break;
 
             case "Blinds":
-               linearLayout1.setVisibility(View.GONE);
-               linearLayout2.setVisibility(View.GONE);
+                linearLayout1.setVisibility(View.GONE);
+                linearLayout2.setVisibility(View.GONE);
 
                 break;
 
@@ -156,12 +179,24 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * oncreate options menu sets option menu
+     *
+     * @param menu
+     * @return true
+     */
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_detail_activity, menu);
         return true;
     }
 
+    /**
+     * handle options item select event
+     *
+     * @param item
+     * @return
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == R.id.menu_delete) {
@@ -171,6 +206,9 @@ public class DetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * deletes the selected device
+     */
     private void deleteDevice() {
 
         new AlertDialog.Builder(this)
@@ -183,7 +221,7 @@ public class DetailActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         database = dbHelper.getWritableDatabase();
 
-                        String where = Constants.DEVICE_ID +" = "+ device.getId()+" AND "+Constants.USER_NAME +" = "+"\"" +MainActivity.currentUser+"\"";
+                        String where = Constants.DEVICE_ID + " = " + device.getId() + " AND " + Constants.USER_NAME + " = " + "\"" + MainActivity.currentUser + "\"";
                         long result = database.delete(Constants.DEVICE_TABLE, where, null);
 
                         if (result == -1) {
@@ -204,7 +242,9 @@ public class DetailActivity extends AppCompatActivity {
     }
 
 
-    // This function updates the value in database
+    /**
+     * This function updates the value in database
+     */
     void updateValues() {
         linearLayout.setVisibility(View.VISIBLE);
         database = dbHelper.getWritableDatabase();
@@ -225,13 +265,14 @@ public class DetailActivity extends AppCompatActivity {
 
         String where = Constants.DEVICE_ID + " = " + device.getId();
 
-
         database.update(Constants.DEVICE_TABLE, values, where, null);
         linearLayout.setVisibility(View.GONE);
         finish();
-
     }
 
+    /**
+     * Handle back press event
+     */
     @Override
     public void onBackPressed() {
 
